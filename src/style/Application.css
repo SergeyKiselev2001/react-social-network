@@ -1,0 +1,121 @@
+.App {
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+  background-color: #EDEEF0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.wrapper {
+  min-height: 100vh;
+  width: 1140px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 5fr;
+      grid-template-columns: 1fr 5fr;
+  -ms-grid-rows: 70px 600px;
+      grid-template-rows: 70px 600px;
+  grid-gap: 10px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+      grid-template-areas: 'header header' 'nav content';
+}
+
+.wrapper .header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: header;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);
+          box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.wrapper .header img {
+  margin-left: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.wrapper .nav {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: nav;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);
+          box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);
+  padding: 20px 10px;
+}
+
+.wrapper .nav a {
+  display: block;
+  border-radius: 10px;
+  font-size: 18px;
+  -webkit-transition: .3s;
+  transition: .3s;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.wrapper .nav a:hover {
+  background-color: lightgray;
+}
+
+.wrapper .nav a:link {
+  color: #2C5985;
+  text-decoration: none;
+}
+
+.wrapper .nav a:link:hover {
+  text-decoration: underline;
+}
+
+.wrapper .content {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: content;
+  background-color: white;
+  border-radius: 5px;
+  -webkit-box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);
+          box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);
+}
+
+.wrapper .content .content__header {
+  background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1613219614_196-p-fon-sinii-s-razvodami-232.jpg");
+  background-size: cover;
+  border-radius: 5px 5px 0px 0px;
+  height: 130px;
+  -webkit-box-shadow: 0px 5px 31px -2px rgba(34, 60, 80, 0.05);
+          box-shadow: 0px 5px 31px -2px rgba(34, 60, 80, 0.05);
+  margin-bottom: 20px;
+}
+
+.wrapper .content .content__header .content__avatar {
+  height: 80px;
+  width: 80px;
+  background-color: #cee3ff;
+  margin-top: 25px;
+  margin-left: 25px;
+  border-radius: 50%;
+}
+
+.wrapper .content .content__header .content__author {
+  color: white;
+  font-size: 28px;
+  position: absolute;
+  font-weight: 600;
+  -webkit-transform: translate(10px, 55px);
+          transform: translate(10px, 55px);
+}
+/*# sourceMappingURL=Application.css.map */
