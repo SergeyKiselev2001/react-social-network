@@ -8,7 +8,9 @@ import Dialogs from './components/Dialogs/Dialogs';
 import { Route, BrowserRouter } from 'react-router-dom';
 // import classes from './style/Application.css';
 
-const App = () => {
+const App = (props) => {
+
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -18,8 +20,8 @@ const App = () => {
           <Navbar />
 
           <div className="content">
-            <Route path="/dialogs" component={Dialogs}/>
-            <Route path="/profile" component={Profile}/>
+            <Route path="/dialogs" component={Dialogs} />
+            <Route path="/profile" component={Profile} postsData={props.postsData} />
           </div>
    
         </div>

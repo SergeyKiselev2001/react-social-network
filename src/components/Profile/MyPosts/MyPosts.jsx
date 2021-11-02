@@ -2,15 +2,25 @@
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
+
+  // let postsData = [
+  //   {id: 1, likesCount: 34, msg: 'heheheh'},
+  //   {id: 2, likesCount: 63, msg: 'How is your it kamasutra???'},
+  //   {id: 3, likesCount: 27, msg: 'Yo'},
+  //   {id: 4, likesCount: 12, msg: 'Yo mtfk'},
+  // ];
+  let postsData = props.postsData;
+
+  let postsElements = postsData.map( el =>  <Post msg={el.msg}/> )
+
   return (
     <div className={classes.MyPosts}>
-      <div className={classes.content__add_post}>ADD POST</div>
+      <div className={classes.content__add_post}><h3>ADD POST</h3></div>
       <div className={classes.content__wall}>
-        WALL
-        <Post msg="zdarova zaebal1" />
-        <Post msg="zdarova zaebal2" />
-        <Post msg="zdarova zaebal3" />
+        WALL 
+        {postsElements}
       </div>
     </div>
   );
