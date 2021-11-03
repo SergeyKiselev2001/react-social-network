@@ -9,19 +9,24 @@ import { Route, BrowserRouter } from 'react-router-dom';
 // import classes from './style/Application.css';
 
 const App = (props) => {
-
+  // component={Profile} postsData={props.postsData} />
 
   return (
     <BrowserRouter>
       <div className="App">
         <div className="wrapper">
           <Header />
-
-          <Navbar />
-
+          <Navbar state={props.state.sidebar} />
+         
           <div className="content">
-            <Route path="/dialogs" component={Dialogs} />
-            <Route path="/profile" component={Profile} postsData={props.postsData} />
+              <Route 
+                  path="/dialogs" 
+                  render={ () => <Dialogs messagesData={props.state.messagesPage.messagesData} dialogsData={props.state.messagesPage.dialogsData} />  } 
+              />
+              <Route 
+                  path="/profile" 
+                  render={ () => <Profile postsData={props.state.profilePage.postsData} /> } 
+              />
           </div>
    
         </div>

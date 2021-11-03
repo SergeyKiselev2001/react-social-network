@@ -1,25 +1,25 @@
 import { NavLink } from 'react-router-dom';
+import Friends from './Friends/Friends';
 import classes from './Navbar.module.css';
 
+const Navbar = (props) => {
+  let friendsList = props.state.friends.map((el) => <Friends fio={el.fio} />);
 
-const Navbar = () => {
+  let navList = props.state.links.map((el) => {
+    return (
+      <div className={classes.nav__link}>
+        <NavLink to={el.src} activeClassName={classes.active_link}>
+          {el.name}
+        </NavLink>
+      </div>
+    );
+  });
+
   return (
     <nav className={classes.nav}>
-      <div className={classes.nav__link}>
-        <NavLink to="/profile" activeClassName={classes.active_link}>Profile</NavLink>
-      </div>
-      <div className={classes.nav__link}>
-        <NavLink to="/dialogs" activeClassName={classes.active_link}>Messages</NavLink>
-      </div>
-      <div className={classes.nav__link}>
-        <NavLink to="#">News</NavLink>
-      </div>
-      <div className={classes.nav__link}>
-        <NavLink to="#">Music</NavLink>
-      </div>
-      <div className={classes.nav__link}>
-        <NavLink to="#">Settings</NavLink>
-      </div>
+      <div>{navList}</div>
+
+      <div>{friendsList}</div>
     </nav>
   );
 };

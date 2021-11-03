@@ -4,7 +4,7 @@ import Post from './Post/Post';
 
 const MyPosts = (props) => {
 
-
+debugger;
   // let postsData = [
   //   {id: 1, likesCount: 34, msg: 'heheheh'},
   //   {id: 2, likesCount: 63, msg: 'How is your it kamasutra???'},
