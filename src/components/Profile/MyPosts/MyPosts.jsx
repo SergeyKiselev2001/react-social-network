@@ -16,12 +16,16 @@ const MyPosts = (props) => {
  
   }
 
+  let changeInput = () => {
+    props.changeInput(textareaLink.current.value);
+  }
+
   return (
     <div className={classes.MyPosts}>
       <div className={classes.content__add_post}><h3>ADD POST</h3></div>
       <div className={classes.content__wall}>
         WALL 
-        <textarea ref={textareaLink} ></textarea>
+        <textarea onChange={changeInput} ref={textareaLink} value={props.currentInputData}/>
         <button onClick={ addPost } >CLICK ME!</button>
         {postsElements}
       </div>

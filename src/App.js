@@ -28,6 +28,8 @@ const App = (props) => {
                   path="/profile" 
                   render={ () => 
                   <Profile 
+                    currentInputData={props.state.profilePage.currentInputData}
+                    changeInput={props.changeInput}
                     postsData={props.state.profilePage.postsData}
                     addPost={props.addPost} 
                   /> } 
