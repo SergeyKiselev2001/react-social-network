@@ -6,6 +6,7 @@ import Profile from './components/Profile/Profile';
 import Dialogs from './components/Dialogs/Dialogs';
 
 import { Route, BrowserRouter } from 'react-router-dom';
+
 // import classes from './style/Application.css';
 
 const App = (props) => {
@@ -21,11 +22,21 @@ const App = (props) => {
           <div className="content">
               <Route 
                   path="/dialogs" 
-                  render={ () => <Dialogs messagesData={props.state.messagesPage.messagesData} dialogsData={props.state.messagesPage.dialogsData} />  } 
+                  render={ () => <Dialogs dispatch={props.dispatch}
+                                  
+                                          messagesData={props.state.messagesPage.messagesData} 
+                                          dialogsData={props.state.messagesPage.dialogsData} 
+                                          newMessageBody = {props.state.messagesPage.newMessageBody} />  } 
               />
+              
               <Route 
                   path="/profile" 
-                  render={ () => <Profile postsData={props.state.profilePage.postsData} /> } 
+                  render={ () => 
+                  <Profile 
+                    currentInputData={props.state.profilePage.currentInputData}
+                    dispatch = {props.dispatch}
+                    postsData={props.state.profilePage.postsData}
+                  /> } 
               />
           </div>
    

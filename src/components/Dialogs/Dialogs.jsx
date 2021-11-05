@@ -1,6 +1,11 @@
 import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
+import React from 'react';
+
+
+import { changeCommentAC } from '../../redux/dialogsReduser';
+import { addCommentAC } from '../../redux/dialogsReduser';
 
 
 const Dialogs = (props) => {
@@ -18,8 +23,21 @@ const Dialogs = (props) => {
   //   { id: 4, msg: 'Yo' },
   // ];
 
+
   let dialogElements = props.dialogsData.map( el => <DialogItem preview={el.name} id={el.id}/> );
   let messageElements = props.messagesData.map( el => <Message message={el.msg} id={el.id}/>)
+
+
+  let addMessage = (e) => {
+    let txt = e.target.value;
+    props.dispatch(addCommentAC());
+  }
+
+  let inputChanging = (e) => {
+    
+    let txt =e.target.value;
+    props.dispatch(changeCommentAC(txt));
+  }
 
   return (
     <div className={classes.Dialogs}>
@@ -29,6 +47,11 @@ const Dialogs = (props) => {
 
       <div className={classes.ActiveDialog}>
         {messageElements}
+
+        <textarea value={props.newMessageBody}
+                onChange={inputChanging}
+                />
+        <button onClick={ addMessage }> ADD MSG!!! </button>
       </div>
     </div>
   );
