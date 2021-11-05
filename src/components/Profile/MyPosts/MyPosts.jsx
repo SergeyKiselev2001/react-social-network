@@ -2,22 +2,22 @@
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from 'react';
+import { addPostAC, changeInputAC } from '../../../redux/profileReduser';
+
 
 const MyPosts = (props) => {
 
   let postsData = props.postsData;
   let postsElements = postsData.map( el =>  <Post msg={el.msg}/> )
 
-  let textareaLink = React.createRef();
 
 
   let addPost = () => {
-    props.addPost(textareaLink.current.value);
- 
+    props.dispatch(addPostAC());
   }
 
-  let changeInput = () => {
-    props.changeInput(textareaLink.current.value);
+  let changeInput = (e) => {
+    props.dispatch(changeInputAC(e.target.value));
   }
 
   return (
@@ -25,7 +25,7 @@ const MyPosts = (props) => {
       <div className={classes.content__add_post}><h3>ADD POST</h3></div>
       <div className={classes.content__wall}>
         WALL 
-        <textarea onChange={changeInput} ref={textareaLink} value={props.currentInputData}/>
+        <textarea onChange={changeInput} value={props.currentInputData}/>
         <button onClick={ addPost } >CLICK ME!</button>
         {postsElements}
       </div>

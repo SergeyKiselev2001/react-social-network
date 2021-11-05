@@ -11,9 +11,8 @@ const Profile = (props) => {
 
       <MyPosts 
         currentInputData={props.currentInputData}
-        changeInput={props.changeInput}
+        dispatch = {props.dispatch}
         postsData={props.postsData} 
-        addPost={props.addPost} 
       />
     </div>
   );

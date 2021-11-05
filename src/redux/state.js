@@ -1,29 +1,35 @@
+import profileReduser from './profileReduser';
+import dialogsReduser from './dialogsReduser';
+import sidebarReduser from './sidebarReduser';
+
+
 let store = {
   _state: {
     profilePage: {
       currentInputData: '',
       postsData: [
         { id: 1, likesCount: 34, msg: 'ПРИВЕТ' },
-        { id: 2, likesCount: 63, msg: 'How is your it kamasutra???' },
+        { id: 2, likesCount: 63, msg: 'тестовый пост 2' },
         { id: 3, likesCount: 27, msg: 'Yo' },
-        { id: 4, likesCount: 12, msg: 'Yo mtfk' },
+        { id: 4, likesCount: 12, msg: 'пост 4' },
       ],
     },
 
     messagesPage: {
       messagesData: [
-        { id: 1, msg: 'heheheh' },
-        { id: 2, msg: 'How is your it kamasutra???' },
-        { id: 3, msg: 'БЛЯЯЯЯЯЯЯЯЯЯЯ' },
-        { id: 4, msg: 'Yo' },
+        { id: 1, msg: 'Привет' },
+        { id: 2, msg: 'Тестовые сообщения' },
+        { id: 3, msg: 'Напиши что нибудь в чат' },
+        { id: 4, msg: 'Лорем ипусм' },
       ],
       dialogsData: [
-        { id: 1, name: 'БЛЯЯЯЯЯЯЯЯЯяя' },
-        { id: 2, name: 'dimich2' },
-        { id: 3, name: 'dimich3' },
-        { id: 4, name: 'hi hitler' },
-        { id: 5, name: 'u kinda smell... like a baka...' },
+        { id: 1, name: 'Евгений' },
+        { id: 2, name: 'Дмитрий' },
+        { id: 3, name: 'Валера' },
+        { id: 4, name: 'Светлана' },
+        { id: 5, name: 'Жанна' },
       ],
+      newMessageBody: '',
     },
 
     sidebar: {
@@ -51,28 +57,25 @@ let store = {
     console.log('no observers');
   },
 
-  addPost() {
-    let newPost = {
-      id: 5,
-      msg: this._state.profilePage.currentInputData,
-      likesCount: 0,
-    };
-
-    this._state.profilePage.postsData.push(newPost);
-    this._state.profilePage.currentInputData = '';
-    this._callSubscriber(this._state);
-  },
-
-  changeInput(inputTxt) {
-    this._state.profilePage.currentInputData = inputTxt;
-
-    console.log(inputTxt);
-    this._callSubscriber(this._state);
-  },
-
   subscribe(observer) {
     this._callSubscriber = observer;
   },
+
+  dispatch(action) {
+    let bufferState = {
+      profilePage: profileReduser(this._state.profilePage, action),
+      messagesPage: dialogsReduser(this._state.messagesPage, action),
+      sidebar: sidebarReduser(this._state.sidebar, action)
+    }
+    
+    this._state = bufferState;
+    this._callSubscriber(this._state);
+  },
 };
+
+
+
+
+
 
 export default store;

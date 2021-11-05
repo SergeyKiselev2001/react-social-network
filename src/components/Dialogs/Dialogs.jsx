@@ -3,6 +3,11 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import React from 'react';
 
+
+import { changeCommentAC } from '../../redux/dialogsReduser';
+import { addCommentAC } from '../../redux/dialogsReduser';
+
+
 const Dialogs = (props) => {
   // let dialogsData = [
   //   { id: 1, name: 'dimich1' },
@@ -18,13 +23,20 @@ const Dialogs = (props) => {
   //   { id: 4, msg: 'Yo' },
   // ];
 
+
   let dialogElements = props.dialogsData.map( el => <DialogItem preview={el.name} id={el.id}/> );
   let messageElements = props.messagesData.map( el => <Message message={el.msg} id={el.id}/>)
 
-  let textareaMessageRef = React.createRef();
 
-  let addMessage = () => {
-    alert(textareaMessageRef.current.value);
+  let addMessage = (e) => {
+    let txt = e.target.value;
+    props.dispatch(addCommentAC());
+  }
+
+  let inputChanging = (e) => {
+    
+    let txt =e.target.value;
+    props.dispatch(changeCommentAC(txt));
   }
 
   return (
@@ -36,7 +48,9 @@ const Dialogs = (props) => {
       <div className={classes.ActiveDialog}>
         {messageElements}
 
-        <textarea ref={textareaMessageRef}></textarea>
+        <textarea value={props.newMessageBody}
+                onChange={inputChanging}
+                />
         <button onClick={ addMessage }> ADD MSG!!! </button>
       </div>
     </div>
