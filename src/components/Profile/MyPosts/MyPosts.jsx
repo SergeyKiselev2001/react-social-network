@@ -2,22 +2,22 @@
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
 import React from 'react';
-import { addPostAC, changeInputAC } from '../../../redux/profileReduser';
 
 
 const MyPosts = (props) => {
-
-  let postsData = props.postsData;
-  let postsElements = postsData.map( el =>  <Post msg={el.msg}/> )
-
+  
+  let postsData = props.state;
+  let postsElements = postsData.map( el =>  <Post msg={el.msg}/> );
 
 
   let addPost = () => {
-    props.dispatch(addPostAC());
+    debugger;
+    props.addPost();
   }
 
   let changeInput = (e) => {
-    props.dispatch(changeInputAC(e.target.value));
+    debugger;
+    props.changeInput(e.target.value);
   }
 
   return (

@@ -3,9 +3,12 @@ import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
-import Dialogs from './components/Dialogs/Dialogs';
+
 
 import { Route, BrowserRouter } from 'react-router-dom';
+import DialogsContainer from './components/Dialogs/DialogsContainer';
+import StoreContext from './StoreContext';
+import NavbarContainer from './components/Navbar/NavbarContainer';
 
 // import classes from './style/Application.css';
 
@@ -17,26 +20,20 @@ const App = (props) => {
       <div className="App">
         <div className="wrapper">
           <Header />
-          <Navbar state={props.state.sidebar} />
+
+          <NavbarContainer />
+
          
           <div className="content">
               <Route 
                   path="/dialogs" 
-                  render={ () => <Dialogs dispatch={props.dispatch}
-                                  
-                                          messagesData={props.state.messagesPage.messagesData} 
-                                          dialogsData={props.state.messagesPage.dialogsData} 
-                                          newMessageBody = {props.state.messagesPage.newMessageBody} />  } 
+                  render={ () => <DialogsContainer />  } 
               />
               
               <Route 
                   path="/profile" 
                   render={ () => 
-                  <Profile 
-                    currentInputData={props.state.profilePage.currentInputData}
-                    dispatch = {props.dispatch}
-                    postsData={props.state.profilePage.postsData}
-                  /> } 
+                  <Profile /> } 
               />
           </div>
    
