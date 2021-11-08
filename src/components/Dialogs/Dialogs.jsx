@@ -24,19 +24,19 @@ const Dialogs = (props) => {
   // ];
 
 
-  let dialogElements = props.dialogsData.map( el => <DialogItem preview={el.name} id={el.id}/> );
-  let messageElements = props.messagesData.map( el => <Message message={el.msg} id={el.id}/>)
+  let dialogElements = props.state.dialogsData.map( el => <DialogItem preview={el.name} id={el.id}/> );
+  let messageElements = props.state.messagesData.map( el => <Message message={el.msg} id={el.id}/>)
 
 
   let addMessage = (e) => {
     let txt = e.target.value;
-    props.dispatch(addCommentAC());
+    props.addMessage(txt)
   }
 
   let inputChanging = (e) => {
     
     let txt =e.target.value;
-    props.dispatch(changeCommentAC(txt));
+    props.inputChanging(txt);
   }
 
   return (
@@ -48,7 +48,7 @@ const Dialogs = (props) => {
       <div className={classes.ActiveDialog}>
         {messageElements}
 
-        <textarea value={props.newMessageBody}
+        <textarea value={props.state.newMessageBody}
                 onChange={inputChanging}
                 />
         <button onClick={ addMessage }> ADD MSG!!! </button>
