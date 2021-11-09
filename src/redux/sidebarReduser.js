@@ -11,6 +11,7 @@ let initialState = {
     { id: 1, src: '/news', name: 'News' },
     { id: 1, src: '/music', name: 'Music' },
     { id: 1, src: '/settings', name: 'Settings' },
+    { id: 1, src: '/users', name: 'USERS' },
   ],
 };
 

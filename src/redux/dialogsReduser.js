@@ -17,25 +17,30 @@ let initialState = {
     { id: 2, name: 'Дмитрий' },
     { id: 3, name: 'Валера' },
     { id: 4, name: 'Светлана' },
-    { id: 5, name: 'Жанна' },
+    { id: 5, name: 'Настя' },
   ],
   newMessageBody: '',
 };
 
 const dialogsReduser = (state = initialState, action) => {
+
   switch (action.type) {
     case 'CHANGE-COMMENT-INPUT':
-      state.newMessageBody = action.inputTxt;
-      break;
+      return  {
+        ...state,
+        newMessageBody : action.inputTxt
+      };
+
     case 'ADD-COMMENT':
-      let newMsg = { id: 5, msg: state.newMessageBody };
-
-      state.messagesData.push(newMsg);
-      state.newMessageBody = '';
-      break;
+      let body = state.newMessageBody;
+      return {
+        ...state,
+        newMessageBody : '',
+        messagesData: [...state.messagesData, { id: 5, msg: body }]
+      };
+    default:
+      return state;
   }
-
-  return state;
 };
 
 export default dialogsReduser;
