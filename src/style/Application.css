@@ -1,3 +1,7 @@
+body {
+  background-color: #edeef0;
+}
+
 .App {
   display: -ms-grid;
   display: grid;
@@ -5,7 +9,6 @@
       -ms-flex-pack: center;
           justify-content: center;
   padding: 10px;
-  background-color: #edeef0;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -29,6 +32,10 @@
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: content;
+  min-height: 600px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 0px 0px 69px -16px rgba(34, 60, 80, 0.11);

@@ -1,0 +1,19 @@
+
+.userWrapper {
+    
+    padding: 5px 7px 5px 7px;
+    
+    
+}
+.user {
+    background-color: rgb(233, 233, 233);
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.img {
+    height: 90px;
+    width: 90px;
+    border-radius: 5px;
+}

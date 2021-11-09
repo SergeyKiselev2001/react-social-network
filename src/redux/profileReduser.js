@@ -16,24 +16,23 @@ let initialState = {
 
 const profileReduser = (state = initialState, action) => {
 
-
   switch (action.type) {
     case 'CHANGE-INPUT':
-      state.currentInputData = action.inputTxt;
-      break;
-    case 'ADD-POST':
-      let newPost = {
-        id: 5,
-        msg: state.currentInputData,
-        likesCount: 0,
+      return {
+        ...state,
+        currentInputData : action.inputTxt
       };
 
-      state.postsData.push(newPost);
-      state.currentInputData = '';
-      break;
+    case 'ADD-POST':
+      let body = state.currentInputData;
+      return {
+        ...state,
+        currentInputData : '',
+        postsData: [...state.postsData, {id: 5,msg: body, likesCount: 0}]
+      };
+    default:
+        return state;
   }
-
-  return state;
 };
 
 export default profileReduser;
