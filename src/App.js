@@ -9,8 +9,11 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import StoreContext from './StoreContext';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-import Users from './components/Users/Users';
+
 import { UsersContainer } from './components/Users/UsersContainer';
+
+
+import User from './components/Users/Users';
 
 // import classes from './style/Application.css';
 
@@ -42,6 +45,7 @@ const App = (props) => {
                   path="/users" 
                   render={ () => 
                   <UsersContainer/> }
+
               />
           </div>
    

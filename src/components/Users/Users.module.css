@@ -17,3 +17,18 @@
     width: 90px;
     border-radius: 5px;
 }
+
+.page {
+    margin: 5px 5px;
+    display: inline-block;
+    height: 25px;
+    width: 30px;
+    background-color: #eee;
+    text-align: center;
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.selectedPage {
+    color: red;
+}

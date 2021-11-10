@@ -2,26 +2,38 @@
 import classes from './Users.module.css';
 import axios from 'axios';
 import userPhoto from './../../assets/images/cheems.jpg';
+import React from 'react';
 
-let Users = (props) => {
+class Users extends React.Component {
 
-
-    if (props.users.length==0){
-
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then((req)=>props.setUsers(req.data.items));
-     
-        // props.setUsers([
-        //     {id: 1, photoURL: 'https://moirody.ru/wp-content/uploads/2019/09/67629845_457571054839268_1640374509175275848_n.jpg', followed: true,  fullName: 'Sergey_BOSS', status: 'I am a BOSS!!!', location: {city: 'Lubersty', country: 'Russia'}},
-        //     {id: 2, photoURL: 'https://images11.cosmopolitan.ru/upload/img_cache/5fd/5fd7936b8b3e3701f9291ffaffb033cb_ce_1080x865x0x0_cropped_1080x565.jpg', followed: false,  fullName: 'Andrew', status: 'I like warface', location: {city: 'Lubersty', country: 'Russia'}},
-        //     {id: 3, photoURL: 'https://moe-lipetsk.ru/media_new/8/4/9/6/2/0/material_1046609/original_photo-thumb_1920.jpg', followed: true,  fullName: 'Alex', status: 'Grizzly corp', location: {city: 'Lubersty', country: 'Russia'}},
-        //     {id: 4, photoURL: 'https://pbs.twimg.com/media/EoQpK2SXUAUP_r3.jpg', followed: false,  fullName: 'Vladimir', status: 'MEI', location: {city: 'Moscow', country: 'Russia'}},
-        // ]);
+    constructor(props){
+        super(props);
+        
     }
 
-    return (
-        <div>
+    componentDidMount(){
+        this.getUsers();
+    }
+
+
+    getUsers(){
+        if (this.props.users.length==0){
+            axios.get('https://social-network.samuraijs.com/api/1.0/users?count=1').then((req)=>this.props.setUsers(req.data.items));
+        }
+    }
+
+    render (){
+        return (
+            <div>
+                <div>
+                    <span className={classes.page}>1</span>
+                    <span className={[classes.selectedPage , classes.page].join(" ")} >2</span>
+                    <span className={classes.page}>3</span>
+                    <span className={classes.page}>4</span>
+                    <span className={classes.page}>5</span>
+                </div>
             {
-                props.users.map((el)=>{return (
+                this.props.users.map((el)=>{return (
                 <div key={el.id} className={classes.userWrapper}>
                     <div className={classes.user}>
                     <span>
@@ -31,8 +43,8 @@ let Users = (props) => {
                         <div>
                             {
                                 el.followed 
-                                ? <button onClick={()=>props.unfollow(el.id)}>Unfollow</button> 
-                                : <button  onClick={()=>props.follow(el.id)}>Follow</button>
+                                ? <button onClick={()=>this.props.unfollow(el.id)}>Unfollow</button> 
+                                : <button  onClick={()=>this.props.follow(el.id)}>Follow</button>
                             }
                             
                         </div>
@@ -51,9 +63,9 @@ let Users = (props) => {
                 </div>
                 )})
             }
-
         </div>
-    )
+        )
+    }
 }
 
 export default Users;
