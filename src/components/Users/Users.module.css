@@ -31,4 +31,5 @@
 
 .selectedPage {
     color: red;
+    cursor: pointer;
 }
