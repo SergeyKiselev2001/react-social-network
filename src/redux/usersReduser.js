@@ -7,8 +7,9 @@ let initialState = {
     totalCount: 10,
     usersPerPage: 100,
     amountOfPages: [1],
+    currentPage: 1,
 
-    currentPage: 1
+    showLoader: true,
 }
 
 export let usersReduser = (state = initialState, action) => {

@@ -3,6 +3,7 @@ import classes from './Users.module.css';
 import axios from 'axios';
 import userPhoto from './../../assets/images/cheems.jpg';
 import React from 'react';
+import loader from './../../assets/svgs/Spinner.svg';
 
 class Users extends React.Component {
 
@@ -61,15 +62,31 @@ class Users extends React.Component {
             .then((req)=>this.props.setCurrentPageUsers(req.data.items));
     }
 
+    renderLoader(){
+        if (this.props.showLoader){
+            return (
+                <img src='./Spinner.svg' alt="LOL"/>
+            )
+        }
+    }
+
     getUsers(){
         if (this.props.users.length==0){
             axios.get('https://social-network.samuraijs.com/api/1.0/users?count=1').then((req)=>this.props.setUsers(req.data.items));
         }
     }
 
+
+
     render (){
         return (
             <div>
+
+                <div>
+                    {
+                        this.renderLoader()
+                    }
+                </div>
                 <div>
     
                     {
