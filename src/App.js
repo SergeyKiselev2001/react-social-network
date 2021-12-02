@@ -17,6 +17,8 @@ import User from './components/Users/Users';
 
 // import classes from './style/Application.css';
 
+///TESTS!!!
+
 const App = (props) => {
   // component={Profile} postsData={props.postsData} />
 
