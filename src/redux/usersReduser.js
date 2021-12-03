@@ -86,13 +86,13 @@ export let usersReduser = (state = initialState, action) => {
 
 }
 
-export const followAC = (userId) => ({type:"FOLLOW",userId:userId});
-export const unfollowAC = (userId) => ({type:"UNFOLLOW",userId:userId});
-export const setUsersAC = (users) => ({type: "SET_USERS", users: users});
-export const setCurrentPageUsersAC = (currentPageUsers) => ({type: "SET_CURRENT_PAGE_USERS", currentPageUsers: currentPageUsers});
+export const follow = (userId) => ({type:"FOLLOW",userId:userId});
+export const unfollow = (userId) => ({type:"UNFOLLOW",userId:userId});
+export const setUsers = (users) => ({type: "SET_USERS", users: users});
+export const setCurrentPageUsers = (currentPageUsers) => ({type: "SET_CURRENT_PAGE_USERS", currentPageUsers: currentPageUsers});
 
-export const setUsersAmountAC = (amount) => ({type: "SET_USERS_AMOUNT", totalCount: amount});
-export const setPagesAmountAC = (amount) => ({type: "SET_PAGES_AMOUNT", amountOfPages: amount});
-export const setCurrentPageAC = (number) => ({type: "SET_CURRENT_PAGE", currentPage: number});
+export const setUsersAmount = (amount) => ({type: "SET_USERS_AMOUNT", totalCount: amount});
+export const setPagesAmount = (amount) => ({type: "SET_PAGES_AMOUNT", amountOfPages: amount});
+export const setCurrentPage = (number) => ({type: "SET_CURRENT_PAGE", currentPage: number});
 
-export const shouldShowLoaderAC = (shouldShowLoader) => ({type: "SHOULD_SHOW_LOADER", shouldShowLoader: shouldShowLoader});
+export const shouldShowLoader = (shouldShowLoader) => ({type: "SHOULD_SHOW_LOADER", shouldShowLoader: shouldShowLoader});
