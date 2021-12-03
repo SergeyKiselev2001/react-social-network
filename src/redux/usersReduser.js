@@ -9,7 +9,7 @@ let initialState = {
     amountOfPages: [1],
     currentPage: 1,
 
-    showLoader: true,
+    showLoader: false,
 }
 
 export let usersReduser = (state = initialState, action) => {
@@ -74,6 +74,12 @@ export let usersReduser = (state = initialState, action) => {
                 currentPage : action.currentPage
             }
 
+        case "SHOULD_SHOW_LOADER":
+            return {
+                ...state,
+                showLoader: action.shouldShowLoader
+            }
+
         default:
             return state;
     }
@@ -88,3 +94,5 @@ export const setCurrentPageUsersAC = (currentPageUsers) => ({type: "SET_CURRENT_
 export const setUsersAmountAC = (amount) => ({type: "SET_USERS_AMOUNT", totalCount: amount});
 export const setPagesAmountAC = (amount) => ({type: "SET_PAGES_AMOUNT", amountOfPages: amount});
 export const setCurrentPageAC = (number) => ({type: "SET_CURRENT_PAGE", currentPage: number});
+
+export const shouldShowLoaderAC = (shouldShowLoader) => ({type: "SHOULD_SHOW_LOADER", shouldShowLoader: shouldShowLoader});

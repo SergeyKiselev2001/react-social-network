@@ -2,7 +2,7 @@
 
 
 import { connect } from "react-redux";
-import { followAC, setCurrentPageAC, setCurrentPageUsersAC, setPagesAmountAC, setUsersAC, setUsersAmountAC, unfollowAC } from "../../redux/usersReduser";
+import { followAC, setCurrentPageAC, setCurrentPageUsersAC, setPagesAmountAC, setUsersAC, setUsersAmountAC, shouldShowLoaderAC, unfollowAC } from "../../redux/usersReduser";
 import Users from './Users';
 
 
@@ -27,7 +27,8 @@ let mapDispatchToProps = (dispatch) => {
         setUsersAmount: (amount)=> dispatch(setUsersAmountAC(amount)),
         setPagesAmount: (amount)=> dispatch(setPagesAmountAC(amount)),
         setCurrentPage: (number)=> dispatch(setCurrentPageAC(number)),
-        setCurrentPageUsers: (currentPageUsers)=> dispatch(setCurrentPageUsersAC(currentPageUsers))
+        setCurrentPageUsers: (currentPageUsers)=> dispatch(setCurrentPageUsersAC(currentPageUsers)),
+        shouldShowLoader: (shouldShowLoader)=> dispatch(shouldShowLoaderAC(shouldShowLoader))
     }
 }
 

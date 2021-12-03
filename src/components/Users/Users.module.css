@@ -34,3 +34,10 @@
     color: red;
     cursor: pointer;
 }
+
+.loader {
+    height: 190px;
+    width: auto;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}

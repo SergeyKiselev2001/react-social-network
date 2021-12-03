@@ -13,6 +13,7 @@ class Users extends React.Component {
     }
 
     componentDidMount(){
+        this.props.shouldShowLoader(true);
         axios.get('https://social-network.samuraijs.com/api/1.0/users?count=100')
         .then(
             (req)=>{ 
@@ -26,6 +27,7 @@ class Users extends React.Component {
                 let amountOfPages = (Math.ceil(totalCount / usersPerPage));
 
                 this.props.setPagesAmount(amountOfPages);
+                this.props.shouldShowLoader(false);
                 }
         );
         this.setCurrentPageUsers(1);
@@ -50,7 +52,7 @@ class Users extends React.Component {
     }
 
     setCurrentPage(e){
-        debugger;
+        this.props.shouldShowLoader(true);
         console.log(e.target.textContent);
         this.props.setCurrentPage(e.target.textContent);
         this.setCurrentPageUsers(e.target.textContent);
@@ -59,13 +61,58 @@ class Users extends React.Component {
 
     setCurrentPageUsers(pageNumber){
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=100&page=${pageNumber}`)
-            .then((req)=>this.props.setCurrentPageUsers(req.data.items));
+            .then((req)=>{
+                this.props.setCurrentPageUsers(req.data.items); 
+                this.props.shouldShowLoader(false);
+            });
     }
 
     renderLoader(){
         if (this.props.showLoader){
             return (
-                <img src='./Spinner.svg' alt="LOL"/>
+                <img className={classes.loader} src="https://cdn.dribbble.com/users/723160/screenshots/6201614/liquid-loading.gif" alt="LOL"/>
+            )
+        }
+    }
+
+    renderPage(){
+        if (this.props.showLoader==false){
+
+            return (
+                <div>
+                    {
+                    this.props.currentPageUsers.map((el)=>{
+                        return (
+                            <div key={el.id} className={classes.userWrapper}>
+                                <div className={classes.user}>
+                                <span>
+                                    <div>
+                                        <img src={el.photos.small !=null ? el.photos.small : userPhoto } alt="ava" className={classes.img}/>
+                                    </div>
+                                    <div>
+                                        {
+                                            el.followed 
+                                            ? <button onClick={()=>this.props.unfollow(el.id)}>Unfollow</button> 
+                                            : <button  onClick={()=>this.props.follow(el.id)}>Follow</button>
+                                        }
+                                    </div>
+                                </span>
+                                <span>
+                                    <span>
+                                        <div>{el.name}</div>
+                                        <div>{el.status}</div>
+                                    </span>
+                                    <span>
+                                        <div>{"el.location.country"}</div>
+                                        <div>{"el.location.city"}</div>
+                                    </span>
+                                </span>
+                                </div>
+                            </div>
+                            )
+                    })
+                }
+                </div>
             )
         }
     }
@@ -77,20 +124,11 @@ class Users extends React.Component {
     }
 
 
-
     render (){
         return (
             <div>
-
                 <div>
                     {
-                        this.renderLoader()
-                    }
-                </div>
-                <div>
-    
-                    {
-    
                         this.props.amountOfPages.map((el) => {
                             if (el == this.props.currentPage){
                                 return (<span className={[classes.selectedPage , classes.page].join(" ")} >{el}</span>)
@@ -101,37 +139,17 @@ class Users extends React.Component {
                         })
                     }
                 </div>
-            {
-                this.props.currentPageUsers.map((el)=>{return (
-                <div key={el.id} className={classes.userWrapper}>
-                    <div className={classes.user}>
-                    <span>
-                        <div>
-                            <img src={el.photos.small !=null ? el.photos.small : userPhoto } alt="ava" className={classes.img}/>
-                        </div>
-                        <div>
-                            {
-                                el.followed 
-                                ? <button onClick={()=>this.props.unfollow(el.id)}>Unfollow</button> 
-                                : <button  onClick={()=>this.props.follow(el.id)}>Follow</button>
-                            }
-                            
-                        </div>
-                    </span>
-                    <span>
-                        <span>
-                            <div>{el.name}</div>
-                            <div>{el.status}</div>
-                        </span>
-                        <span>
-                            <div>{"el.location.country"}</div>
-                            <div>{"el.location.city"}</div>
-                        </span>
-                    </span>
-                    </div>
+
+                <div>
+                    {
+                        this.renderLoader()
+                    }
                 </div>
-                )})
-            }
+                <div>
+                    {
+                        this.renderPage()
+                    }
+                </div>
         </div>
         )
     }
