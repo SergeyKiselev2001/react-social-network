@@ -4,6 +4,7 @@ import axios from 'axios';
 import userPhoto from './../../assets/images/cheems.jpg';
 import React from 'react';
 import loader from './../../assets/svgs/Spinner.svg';
+import { NavLink } from 'react-router-dom';
 
 class Users extends React.Component {
 
@@ -18,6 +19,7 @@ class Users extends React.Component {
         .then(
             (req)=>{ 
 
+                debugger;
                 this.props.setUsers(req.data.items);
                 this.props.setUsersAmount(req.data.totalCount);
 
@@ -79,16 +81,20 @@ class Users extends React.Component {
         if (this.props.showLoader==false){
 
             return (
-                <div>
+                
+                    <div>
                     {
                     this.props.currentPageUsers.map((el)=>{
-                        return (
-                            <div key={el.id} className={classes.userWrapper}>
+                        return ( <div key={el.id} className={classes.userWrapper}>
                                 <div className={classes.user}>
                                 <span>
+                                    
                                     <div>
+                                        <NavLink to={'/profile/' + el.id}>
                                         <img src={el.photos.small !=null ? el.photos.small : userPhoto } alt="ava" className={classes.img}/>
+                                        </NavLink>
                                     </div>
+                                    
                                     <div>
                                         {
                                             el.followed 
@@ -109,7 +115,7 @@ class Users extends React.Component {
                                 </span>
                                 </div>
                             </div>
-                            )
+                        )
                     })
                 }
                 </div>

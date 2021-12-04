@@ -1,10 +1,5 @@
 import './App.css';
 
-import Header from './components/Header/Header';
-import Navbar from './components/Navbar/Navbar';
-import Profile from './components/Profile/Profile';
-
-
 import { Route, BrowserRouter } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import StoreContext from './StoreContext';
@@ -14,6 +9,8 @@ import { UsersContainer } from './components/Users/UsersContainer';
 
 
 import User from './components/Users/Users';
+import ProfileContainer from './components/Profile/ProfileContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
 
 // import classes from './style/Application.css';
 
@@ -26,7 +23,7 @@ const App = (props) => {
     <BrowserRouter>
       <div className="App">
         <div className="wrapper">
-          <Header />
+          <HeaderContainer />
 
           <NavbarContainer />
 
@@ -38,9 +35,9 @@ const App = (props) => {
               />
               
               <Route 
-                  path="/profile" 
+                  path="/profile/:USER_ID?" 
                   render={ () => 
-                  <Profile /> } 
+                  <ProfileContainer /> } 
               />
 
               <Route 

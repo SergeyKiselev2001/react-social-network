@@ -1,10 +1,10 @@
-export let addPostAC = () => ({ type: 'ADD-POST' });
-export let changeInputAC = (msg) => ({
-  type: 'CHANGE-INPUT',
-  inputTxt: msg,
-});
 
 let initialState = {
+
+  profileInfo: {},
+
+  currentUserId: null,
+
   currentInputData: '',
   postsData: [
     { id: 1, likesCount: 34, msg: 'ПРИВЕТ' },
@@ -30,9 +30,33 @@ const profileReduser = (state = initialState, action) => {
         currentInputData : '',
         postsData: [...state.postsData, {id: 5,msg: body, likesCount: 0}]
       };
+
+    case "SET_PROFILE_INFO":
+      return {
+        ...state,
+        profileInfo: action.profileInfo
+      }
+
+    case "SET_CURRENT_USER_ID":
+      return {
+        ...state,
+        currentUserId: action.currentUserId
+      }
     default:
         return state;
   }
 };
+
+
+export let addPostAC = () => ({ type: 'ADD-POST' });
+export let changeInputAC = (msg) => ({
+  type: 'CHANGE-INPUT',
+  inputTxt: msg,
+});
+
+export let setProfileInfo = (obj) => ({type: "SET_PROFILE_INFO", profileInfo: obj});
+export let setCurrentUserID = (number) => ({type: "SET_CURRENT_USER_ID", currentUserId: number});
+
+
 
 export default profileReduser;

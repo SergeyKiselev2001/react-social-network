@@ -16,4 +16,11 @@
   height: 30px;
   cursor: pointer;
 }
+
+.loginBlock {
+  height: 30px;
+  width: 200px;
+  background-color: red;
+  float: right;
+}
 /*# sourceMappingURL=Header.module.css.map */
