@@ -19,7 +19,7 @@ class Users extends React.Component {
         .then(
             (req)=>{ 
 
-                debugger;
+              
                 this.props.setUsers(req.data.items);
                 this.props.setUsersAmount(req.data.totalCount);
 
@@ -55,7 +55,7 @@ class Users extends React.Component {
 
     setCurrentPage(e){
         this.props.shouldShowLoader(true);
-        console.log(e.target.textContent);
+    
         this.props.setCurrentPage(e.target.textContent);
         this.setCurrentPageUsers(e.target.textContent);
     }

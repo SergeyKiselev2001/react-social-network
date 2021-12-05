@@ -3,7 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
 
+
+  let login = props.props.authData?.login;
+  
+
   debugger;
+
   return (
     <header className={classes.header}>
       <img
@@ -16,6 +21,14 @@ const Header = (props) => {
         </div>
       </NavLink>
       
+      <div>
+
+        {
+          props.props.isAuth ? 
+          login : "NOPE"
+        }
+      </div>
+
     </header>
   );
 };
