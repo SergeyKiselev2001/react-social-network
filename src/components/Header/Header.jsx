@@ -7,7 +7,7 @@ const Header = (props) => {
   let login = props.props.authData?.login;
   
 
-  debugger;
+ 
 
   return (
     <header className={classes.header}>
