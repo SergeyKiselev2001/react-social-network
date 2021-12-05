@@ -1,5 +1,4 @@
 import classes from "./Users.module.css";
-import axios from "axios";
 import userPhoto from "./../../assets/images/cheems.jpg";
 import React from "react";
 import { NavLink } from "react-router-dom";
@@ -14,9 +13,10 @@ class Users extends React.Component {
 
   componentDidMount() {
     this.props.shouldShowLoader(true);
-    getUsers().then((req) => {
-      this.props.setUsers(req.data.items);
-      this.props.setUsersAmount(req.data.totalCount);
+    //
+    getUsers().then((data) => {
+      this.props.setUsers(data.items);
+      this.props.setUsersAmount(data.totalCount);
 
       let usersPerPage = this.props.usersPerPage;
       let totalCount = this.props.totalCount;
@@ -29,11 +29,10 @@ class Users extends React.Component {
     this.setCurrentPageUsers(1);
   }
 
-  componentDidUpdate() {}
 
   getAmountOfUsers() {
-    getUsers()
-      .then((req) => this.props.setUsersAmount(req.data.totalCount));
+      //
+    getUsers().then((data) => this.props.setUsersAmount(data.totalCount));
   }
 
   getAmountOfPages() {
@@ -52,8 +51,9 @@ class Users extends React.Component {
   }
 
   setCurrentPageUsers(pageNumber) {
-    getUsers(pageNumber).then((req) => {
-      this.props.setCurrentPageUsers(req.data.items);
+      //
+    getUsers(pageNumber).then((data) => {
+      this.props.setCurrentPageUsers(data.items);
       this.props.shouldShowLoader(false);
     });
   }
@@ -97,15 +97,8 @@ class Users extends React.Component {
                       {el.followed ? (
                         <button
                           onClick={() => {
-                            unFollow(el.id)
-                              .then((res) => {
-                                if (res.data.resultCode == 0) {
-                                  //success
-
-                                  debugger;
-                                  this.props.unfollow(el.id);
-                                }
-                              });
+                              //
+                            unFollow(el.id).then((data) => {if (data.resultCode == 0) this.props.unfollow(el.id);});
                           }}
                         >
                           Unfollow
@@ -113,13 +106,8 @@ class Users extends React.Component {
                       ) : (
                         <button
                           onClick={() => {
-                            follow(el.id)
-                              .then((res) => {
-                                if (res.data.resultCode == 0) {
-                                  //success
-                                  this.props.follow(el.id);
-                                }
-                              });
+                              //
+                            follow(el.id).then((data) => {if (data.resultCode == 0) this.props.follow(el.id);});
                           }}
                         >
                           Follow
@@ -154,9 +142,7 @@ class Users extends React.Component {
           {this.props.amountOfPages.map((el) => {
             if (el == this.props.currentPage) {
               return (
-                <span
-                  className={[classes.selectedPage, classes.page].join(" ")}
-                >
+                <span className={[classes.selectedPage, classes.page].join(" ")}>
                   {el}
                 </span>
               );

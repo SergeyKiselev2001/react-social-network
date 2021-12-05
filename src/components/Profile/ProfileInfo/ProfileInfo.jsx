@@ -7,8 +7,6 @@ const ProfileInfo = (props) => {
   //let currentUserId = props.location.pathname.replace('/profile/','');
   //setCurrentUserID
 
-    
-  
   // {
   //   aboutMe: "я круто чувак 1001%",
   //   contacts: {
