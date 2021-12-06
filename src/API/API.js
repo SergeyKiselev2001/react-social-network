@@ -15,8 +15,16 @@ const axiosInstance = axios.create({
 
  
 
-export const authMe = () => {
-    return axiosInstance.get("auth/me").then((res)=>res.data);
+export const authAPI = {
+    authMe(){
+        return axiosInstance.get("auth/me").then((res)=>res.data);
+    }
+}
+
+export const profileAPI = {
+    getProfileInfo(id){
+        return axios.get(BASE_URL + 'profile/'+ id)
+    }
 }
 
 export const usersAPI = {

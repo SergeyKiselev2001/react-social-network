@@ -1,3 +1,5 @@
+import { authAPI } from "../API/API";
+
 let initialState = {
   userId: null,
   email: "",
@@ -42,5 +44,16 @@ export let setAuthUserData = (obj) => ({
   authData: obj,
   isAuth: true
 });
+
+
+// SANKI
+
+export const authMeThunkCreator = () => (dispatch) => {
+  authAPI.authMe().then((res)=>{
+    if (res.resultCode == 0){dispatch(setAuthUserData(res.data))}
+  })
+}
+
+
 
 export default authReduser;

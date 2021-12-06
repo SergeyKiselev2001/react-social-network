@@ -3,10 +3,10 @@
 
 import { connect } from "react-redux";
 import 
-    {   follow, getUsersThunkCreator, followingInProgress, 
+    {   getUsersThunkCreator,
         setUsers, setCurrentPage, setCurrentPageUsers, 
         setPagesAmount, setUsersAmount, shouldShowLoader,
-        unfollow, setCurrentPageThunkCreator, followThunkCreator,
+        setCurrentPageThunkCreator, followThunkCreator,
         unfollowThunkCreator } from "../../redux/usersReduser";
 
 
@@ -42,9 +42,7 @@ let mapStateToProps = (state) => {
 
 export let UsersContainer = connect(mapStateToProps, 
 {
-    follow,
-    unfollow,
-    followingInProgress,
+
     setUsers,
     setUsersAmount,
     setPagesAmount,

@@ -89,6 +89,9 @@ export let usersReduser = (state = initialState, action) => {
   }
 };
 
+
+// Action Creators
+
 export const follow = (userId) => ({ type: "FOLLOW", userId: userId });
 export const unfollow = (userId) => ({ type: "UNFOLLOW", userId: userId });
 export const followingInProgress = (id) => ({
@@ -133,7 +136,6 @@ export const getUsersThunkCreator = () => {
 
       let usersPerPage = 100;
       let totalCount = data.totalCount;
-
       let amountOfPages = Math.ceil(totalCount / usersPerPage);
 
       dispatch(setPagesAmount(amountOfPages));
@@ -152,7 +154,7 @@ export const setCurrentPageThunkCreator =
       dispatch(setCurrentPageUsers(data.items));
       dispatch(shouldShowLoader(false));
     });
-  };
+};
 
 export const followThunkCreator = (id) => (dispatch) => {
   dispatch(followingInProgress(true));
@@ -166,5 +168,5 @@ export const unfollowThunkCreator = (id) => (dispatch) => {
     usersAPI.unFollow(id).then((data) => {
         if (data.resultCode === 0) dispatch(unfollow(id));
     });
-}
+};
 

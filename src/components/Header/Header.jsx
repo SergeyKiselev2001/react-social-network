@@ -5,9 +5,6 @@ const Header = (props) => {
 
 
   let login = props.props.authData?.login;
-  
-
- 
 
   return (
     <header className={classes.header}>
