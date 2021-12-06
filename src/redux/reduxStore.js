@@ -5,7 +5,7 @@ import sidebarReduser from './sidebarReduser';
 import { usersReduser } from './usersReduser';
 import authReduser from './authReduser';
 
-
+import thunkMiddleware from 'redux-thunk';
 
 
 let redusers = combineReducers({
@@ -16,7 +16,7 @@ let redusers = combineReducers({
     auth : authReduser
 });
 
-let store = createStore(redusers, applyMiddleware);
+let store = createStore(redusers, applyMiddleware(thunkMiddleware));
 
 
 export default store;

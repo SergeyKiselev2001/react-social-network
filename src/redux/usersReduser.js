@@ -18,7 +18,7 @@ export let usersReduser = (state = initialState, action) => {
       return {
         ...state,
         users: state.users.map((el) => {
-          if (el.id == action.userId) {
+          if (el.id === action.userId) {
             return { ...el, followed: true };
           } else {
             return el;
@@ -30,7 +30,7 @@ export let usersReduser = (state = initialState, action) => {
       return {
         ...state,
         users: state.users.map((el) => {
-          if (el.id == action.userId) {
+          if (el.id === action.userId) {
             return { ...el, followed: false };
           }
           return el;
@@ -123,17 +123,16 @@ export const shouldShowLoader = (shouldShowLoader) => ({
 
 // SANKI
 
-export const getUsersThunkCreator = (props) => {
+export const getUsersThunkCreator = () => {
   return (dispatch) => {
-
     dispatch(shouldShowLoader(true));
 
     usersAPI.getUsers().then((data) => {
       dispatch(setUsers(data.items));
       dispatch(setUsersAmount(data.totalCount));
 
-      let usersPerPage = props.usersPerPage;
-      let totalCount = props.totalCount;
+      let usersPerPage = 100;
+      let totalCount = data.totalCount;
 
       let amountOfPages = Math.ceil(totalCount / usersPerPage);
 
@@ -142,3 +141,30 @@ export const getUsersThunkCreator = (props) => {
     });
   };
 };
+
+export const setCurrentPageThunkCreator =
+  (e, pageNumber = 0) =>
+  (dispatch) => {
+    dispatch(shouldShowLoader(true));
+    dispatch(setCurrentPage(e.target.textContent));
+    let page = pageNumber || e.target.textContent;
+    usersAPI.getUsers(page).then((data) => {
+      dispatch(setCurrentPageUsers(data.items));
+      dispatch(shouldShowLoader(false));
+    });
+  };
+
+export const followThunkCreator = (id) => (dispatch) => {
+  dispatch(followingInProgress(true));
+  usersAPI.follow(id).then((data) => {
+    if (data.resultCode === 0) dispatch(follow(id));
+    dispatch(followingInProgress(false));
+  });
+};
+
+export const unfollowThunkCreator = (id) => (dispatch) => {
+    usersAPI.unFollow(id).then((data) => {
+        if (data.resultCode === 0) dispatch(unfollow(id));
+    });
+}
+

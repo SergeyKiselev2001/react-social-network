@@ -3,7 +3,6 @@ import userPhoto from "./../../assets/images/cheems.jpg";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { usersAPI } from "../../API/API";
 
 class Users extends React.Component {
   constructor(props) {
@@ -11,37 +10,13 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    // this.props.shouldShowLoader(true);
-    //
 
-    debugger;
     this.props.getUsersThunkCreator();
-
-    // usersAPI.getUsers().then((data) => {
-    //   this.props.setUsers(data.items);
-    //   this.props.setUsersAmount(data.totalCount);
-
-    //   let usersPerPage = this.props.usersPerPage;
-    //   let totalCount = this.props.totalCount;
-
-    //   let amountOfPages = Math.ceil(totalCount / usersPerPage);
-
-    //   this.props.setPagesAmount(amountOfPages);
-    //   this.props.shouldShowLoader(false);
-    // });
-    
-    this.setCurrentPageUsers(1);
-  }
-
-  componentDidUpdate(){
-    let a = this.props;
-    debugger;
+    this.setCurrentPage({target: {textContent : null}}, 1);
   }
 
   getAmountOfUsers() {
-    //
-    usersAPI
-      .getUsers()
+    this.props.getUsersThunkCreator()
       .then((data) => this.props.setUsersAmount(data.totalCount));
   }
 
@@ -49,23 +24,11 @@ class Users extends React.Component {
     let usersPerPage = this.props.usersPerPage;
     let totalCount = this.props.totalCount;
     let amountOfPages = ~~(totalCount / usersPerPage);
-
     this.props.setPagesAmount(amountOfPages);
   }
 
-  setCurrentPage(e) {
-    this.props.shouldShowLoader(true);
-
-    this.props.setCurrentPage(e.target.textContent);
-    this.setCurrentPageUsers(e.target.textContent);
-  }
-
-  setCurrentPageUsers(pageNumber) {
-    //
-    usersAPI.getUsers(pageNumber).then((data) => {
-      this.props.setCurrentPageUsers(data.items);
-      this.props.shouldShowLoader(false);
-    });
+  setCurrentPage(e, pageNumber = 0) {
+    this.props.setCurrentPageThunkCreator(e, pageNumber = 0);
   }
 
   renderLoader() {
@@ -81,7 +44,7 @@ class Users extends React.Component {
   }
 
   renderPage() {
-    if (this.props.showLoader == false) {
+    if (this.props.showLoader === false) {
       return (
         <div>
           {this.props.currentPageUsers.map((el) => {
@@ -107,14 +70,11 @@ class Users extends React.Component {
                       {el.followed ? (
                         <button
 
-                          disabled={this.props.followingInProgressID== el.id}
+                          disabled={this.props.followingInProgressID === el.id}
 
                           onClick={() => {
                             //
-                            usersAPI.unFollow(el.id).then((data) => {
-                              if (data.resultCode == 0)
-                                this.props.unfollow(el.id);
-                            });
+                            this.props.unfollowThunkCreator(el.id);
                           }}
                         >
                           Unfollow
@@ -128,17 +88,9 @@ class Users extends React.Component {
                             }
                           </h1>
                         <button
-
-                          disabled={this.props.followingInProgressID == el.id}
-
+                          disabled={this.props.followingInProgressID === el.id}
                           onClick={() => {
-                            //
-                            this.props.followingInProgress(true);
-                            usersAPI.follow(el.id).then((data) => {
-                              if (data.resultCode == 0)
-                                this.props.follow(el.id);
-                                this.props.followingInProgress(false);
-                            });
+                            this.props.followThunkCreator(el.id)
                           }}
                         >
                           Follow

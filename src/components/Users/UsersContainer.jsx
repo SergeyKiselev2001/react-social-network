@@ -2,7 +2,14 @@
 
 
 import { connect } from "react-redux";
-import { follow, getUsersThunkCreator, followingInProgress, setUsers, setCurrentPage, setCurrentPageUsers, setPagesAmount, setUsersAmount, shouldShowLoader, unfollow} from "../../redux/usersReduser";
+import 
+    {   follow, getUsersThunkCreator, followingInProgress, 
+        setUsers, setCurrentPage, setCurrentPageUsers, 
+        setPagesAmount, setUsersAmount, shouldShowLoader,
+        unfollow, setCurrentPageThunkCreator, followThunkCreator,
+        unfollowThunkCreator } from "../../redux/usersReduser";
+
+
 import Users from './Users';
 
 
@@ -45,5 +52,8 @@ export let UsersContainer = connect(mapStateToProps,
     setCurrentPageUsers,
     shouldShowLoader,
 
-    getUsersThunkCreator
+    getUsersThunkCreator,
+    setCurrentPageThunkCreator,
+    followThunkCreator,
+    unfollowThunkCreator
 })(Users);
