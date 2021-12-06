@@ -2,7 +2,7 @@
 
 
 import { connect } from "react-redux";
-import { follow, setUsers, setCurrentPage, setCurrentPageUsers, setPagesAmount, setUsersAmount, shouldShowLoader, unfollow} from "../../redux/usersReduser";
+import { follow, followingInProgress, setUsers, setCurrentPage, setCurrentPageUsers, setPagesAmount, setUsersAmount, shouldShowLoader, unfollow} from "../../redux/usersReduser";
 import Users from './Users';
 
 
@@ -15,7 +15,8 @@ let mapStateToProps = (state) => {
         amountOfPages: state.users.amountOfPages,
         currentPage : state.users.currentPage,
         currentPageUsers : state.users.currentPageUsers,
-        showLoader : state.users.showLoader
+        showLoader : state.users.showLoader,
+        followingInProgress : state.users.followingInProgress
     }
 }
 
@@ -36,6 +37,7 @@ export let UsersContainer = connect(mapStateToProps,
 {
     follow,
     unfollow,
+    followingInProgress,
     setUsers,
     setUsersAmount,
     setPagesAmount,

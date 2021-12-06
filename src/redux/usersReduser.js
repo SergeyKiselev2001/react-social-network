@@ -10,19 +10,23 @@ let initialState = {
     currentPage: 1,
 
     showLoader: false,
+    followingInProgress: false
 }
 
 export let usersReduser = (state = initialState, action) => {
 
     switch (action.type) {
         case "FOLLOW":
+            debugger;
             return {
                 ...state,
                 users: state.users.map(el=>{
                     if (el.id == action.userId){
                         return {...el, followed: true}
-                    } 
-                    return el;
+                    } else {
+                        return el
+                    }
+                    
                 })
             }
 
@@ -35,6 +39,12 @@ export let usersReduser = (state = initialState, action) => {
                     } 
                     return el;
                 })
+            }
+
+        case "FOLLOWING_IN_PROGRESS":
+            return {
+                ...state,
+                followingInProgress: action.followingInProgress
             }
         case "SET_USERS":
 
@@ -88,6 +98,8 @@ export let usersReduser = (state = initialState, action) => {
 
 export const follow = (userId) => ({type:"FOLLOW",userId:userId});
 export const unfollow = (userId) => ({type:"UNFOLLOW",userId:userId});
+export const followingInProgress = (bool) => ({type: "FOLLOWING_IN_PROGRESS", followingInProgress: bool});
+
 export const setUsers = (users) => ({type: "SET_USERS", users: users});
 export const setCurrentPageUsers = (currentPageUsers) => ({type: "SET_CURRENT_PAGE_USERS", currentPageUsers: currentPageUsers});
 

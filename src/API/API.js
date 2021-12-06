@@ -4,41 +4,31 @@ const API_KEY = "4fb0c0c3-a96e-4b5b-b940-2dbd05ad8ef1";
 const BASE_URL = "https://social-network.samuraijs.com/api/1.0/";
 // Да, я знаю что этот файл нужно заигнорить через гит, но в рамках учебного проекта оставляю его открытым
 
-export const getUsers = (pageNumber = 1) => {
-  return axios.get( BASE_URL + "users?count=100&page=" + pageNumber,
-    {
-      withCredentials: true,
-    }
-  ).then((res)=>res.data);
-};
 
-export const follow = (userId) => {
-  return axios.post( BASE_URL + "follow/" + userId,
-    {},
-    {
-      withCredentials: true,
-      headers: {
+const axiosInstance = axios.create({
+    withCredentials: true,
+    baseURL: BASE_URL,
+    headers: {
         "API-KEY": API_KEY,
-      },
-    }
-  ).then((res)=>res.data);
-};
+    },
+});
 
-export const unFollow = (userId) => {
-  return axios.delete( BASE_URL + "follow/" + userId,
-    {},
-    {
-      withCredentials: true,
-      headers: {
-        "API-KEY": API_KEY,
-      },
-    }
-  ).then((res)=>res.data);
-};
-
+ 
 
 export const authMe = () => {
-    return axios.get( BASE_URL + "auth/me", {
-            withCredentials : true
-    }).then((res)=>res.data);
+    return axiosInstance.get("auth/me").then((res)=>res.data);
+}
+
+export const usersAPI = {
+    getUsers(pageNumber = 1){
+        return axiosInstance.get("users?count=100&page=" + pageNumber).then((res)=>res.data);
+    },
+    
+    follow(userId){
+        return axiosInstance.post("follow/" + userId).then((res)=>res.data);
+    },
+
+    unFollow(userId){
+        return axiosInstance.delete("follow/" + userId).then((res)=>res.data);
+    }
 }

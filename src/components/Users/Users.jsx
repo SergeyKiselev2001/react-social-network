@@ -3,10 +3,9 @@ import userPhoto from "./../../assets/images/cheems.jpg";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { follow, getUsers, unFollow } from "../../API/API";
+import { usersAPI } from "../../API/API";
 
 class Users extends React.Component {
-
   constructor(props) {
     super(props);
   }
@@ -14,7 +13,8 @@ class Users extends React.Component {
   componentDidMount() {
     this.props.shouldShowLoader(true);
     //
-    getUsers().then((data) => {
+
+    usersAPI.getUsers().then((data) => {
       this.props.setUsers(data.items);
       this.props.setUsersAmount(data.totalCount);
 
@@ -29,10 +29,11 @@ class Users extends React.Component {
     this.setCurrentPageUsers(1);
   }
 
-
   getAmountOfUsers() {
-      //
-    getUsers().then((data) => this.props.setUsersAmount(data.totalCount));
+    //
+    usersAPI
+      .getUsers()
+      .then((data) => this.props.setUsersAmount(data.totalCount));
   }
 
   getAmountOfPages() {
@@ -51,8 +52,8 @@ class Users extends React.Component {
   }
 
   setCurrentPageUsers(pageNumber) {
-      //
-    getUsers(pageNumber).then((data) => {
+    //
+    usersAPI.getUsers(pageNumber).then((data) => {
       this.props.setCurrentPageUsers(data.items);
       this.props.shouldShowLoader(false);
     });
@@ -97,17 +98,26 @@ class Users extends React.Component {
                       {el.followed ? (
                         <button
                           onClick={() => {
-                              //
-                            unFollow(el.id).then((data) => {if (data.resultCode == 0) this.props.unfollow(el.id);});
+                            //
+                            usersAPI.unFollow(el.id).then((data) => {
+                              if (data.resultCode == 0)
+                                this.props.unfollow(el.id);
+                            });
                           }}
                         >
                           Unfollow
                         </button>
                       ) : (
                         <button
+                          disabled={this.props.followingInProgress}
                           onClick={() => {
-                              //
-                            follow(el.id).then((data) => {if (data.resultCode == 0) this.props.follow(el.id);});
+                            //
+                            this.props.followingInProgress(true);
+                            usersAPI.follow(el.id).then((data) => {
+                              if (data.resultCode == 0)
+                                this.props.follow(el.id);
+                                this.props.followingInProgress(false);
+                            });
                           }}
                         >
                           Follow
@@ -134,7 +144,6 @@ class Users extends React.Component {
     }
   }
 
-
   render() {
     return (
       <div>
@@ -142,7 +151,9 @@ class Users extends React.Component {
           {this.props.amountOfPages.map((el) => {
             if (el == this.props.currentPage) {
               return (
-                <span className={[classes.selectedPage, classes.page].join(" ")}>
+                <span
+                  className={[classes.selectedPage, classes.page].join(" ")}
+                >
                   {el}
                 </span>
               );
