@@ -2,7 +2,7 @@
 
 
 import { connect } from "react-redux";
-import { follow, followingInProgress, setUsers, setCurrentPage, setCurrentPageUsers, setPagesAmount, setUsersAmount, shouldShowLoader, unfollow} from "../../redux/usersReduser";
+import { follow, getUsersThunkCreator, followingInProgress, setUsers, setCurrentPage, setCurrentPageUsers, setPagesAmount, setUsersAmount, shouldShowLoader, unfollow} from "../../redux/usersReduser";
 import Users from './Users';
 
 
@@ -16,7 +16,7 @@ let mapStateToProps = (state) => {
         currentPage : state.users.currentPage,
         currentPageUsers : state.users.currentPageUsers,
         showLoader : state.users.showLoader,
-        followingInProgress : state.users.followingInProgress
+        followingInProgressID : state.users.followingInProgressID
     }
 }
 
@@ -43,5 +43,7 @@ export let UsersContainer = connect(mapStateToProps,
     setPagesAmount,
     setCurrentPage,
     setCurrentPageUsers,
-    shouldShowLoader
+    shouldShowLoader,
+
+    getUsersThunkCreator
 })(Users);

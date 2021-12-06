@@ -11,22 +11,31 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-    this.props.shouldShowLoader(true);
+    // this.props.shouldShowLoader(true);
     //
 
-    usersAPI.getUsers().then((data) => {
-      this.props.setUsers(data.items);
-      this.props.setUsersAmount(data.totalCount);
+    debugger;
+    this.props.getUsersThunkCreator();
 
-      let usersPerPage = this.props.usersPerPage;
-      let totalCount = this.props.totalCount;
+    // usersAPI.getUsers().then((data) => {
+    //   this.props.setUsers(data.items);
+    //   this.props.setUsersAmount(data.totalCount);
 
-      let amountOfPages = Math.ceil(totalCount / usersPerPage);
+    //   let usersPerPage = this.props.usersPerPage;
+    //   let totalCount = this.props.totalCount;
 
-      this.props.setPagesAmount(amountOfPages);
-      this.props.shouldShowLoader(false);
-    });
+    //   let amountOfPages = Math.ceil(totalCount / usersPerPage);
+
+    //   this.props.setPagesAmount(amountOfPages);
+    //   this.props.shouldShowLoader(false);
+    // });
+    
     this.setCurrentPageUsers(1);
+  }
+
+  componentDidUpdate(){
+    let a = this.props;
+    debugger;
   }
 
   getAmountOfUsers() {
@@ -97,6 +106,9 @@ class Users extends React.Component {
                     <div>
                       {el.followed ? (
                         <button
+
+                          disabled={this.props.followingInProgressID== el.id}
+
                           onClick={() => {
                             //
                             usersAPI.unFollow(el.id).then((data) => {
@@ -108,8 +120,17 @@ class Users extends React.Component {
                           Unfollow
                         </button>
                       ) : (
+                        <div>
+                          <h1>
+                            {
+                              this.props.followingInProgressBool ?
+                                "LOL DA" : "LOL NET"
+                            }
+                          </h1>
                         <button
-                          disabled={this.props.followingInProgress}
+
+                          disabled={this.props.followingInProgressID == el.id}
+
                           onClick={() => {
                             //
                             this.props.followingInProgress(true);
@@ -122,6 +143,8 @@ class Users extends React.Component {
                         >
                           Follow
                         </button>
+                        </div>
+                      
                       )}
                     </div>
                   </span>
