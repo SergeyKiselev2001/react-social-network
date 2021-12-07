@@ -2,8 +2,6 @@ import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import React from 'react';
-import { Redirect } from 'react-router';
-
 
 const Dialogs = (props) => {
   // let dialogsData = [
@@ -19,12 +17,6 @@ const Dialogs = (props) => {
   //   { id: 3, msg: 'Yo' },
   //   { id: 4, msg: 'Yo' },
   // ];
-
-  
-  if (props.isAuthorised === false){
-    return <Redirect to="/login"/>
-  }
-
 
   let dialogElements = props.state.dialogsData.map( el => <DialogItem preview={el.name} id={el.id}/> );
   let messageElements = props.state.messagesData.map( el => <Message message={el.msg} id={el.id}/>)

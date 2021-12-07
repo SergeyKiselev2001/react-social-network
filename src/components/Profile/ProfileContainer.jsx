@@ -5,18 +5,16 @@ import React from "react";
 import { connect } from "react-redux";
 import { profileDidMountThunkCreator } from "../../redux/profileReduser";
 import { Redirect, withRouter } from "react-router";
+import withAuthRedirect from "../HOCs/AuthHOC";
 
 class ProfileContainer extends React.Component {
 
   async componentDidMount() {
-
     let currentUserId = this.props.match.params.USER_ID;
-
     this.props.profileDidMountThunkCreator(currentUserId);
   }
 
   render() {
-
     if (this.props.isAuthorised === false){
       return <Redirect to="/login"/>
     } 
@@ -29,20 +27,17 @@ class ProfileContainer extends React.Component {
   }
 }
 
+let ProfileRedirectContainer = withAuthRedirect(ProfileContainer);
+
 const mapStateToProps = (state) => {
   return {
-    isAuthorised : state.auth.isAuth,
     ProfileInfo: state.profilePage.profileInfo,
 
   };
 };
 
-
-
-
-
 let ProfileContainerCONNECTED = connect(mapStateToProps, {
   profileDidMountThunkCreator
-})(ProfileContainer);
+})(ProfileRedirectContainer);
 
 export default withRouter(ProfileContainerCONNECTED);

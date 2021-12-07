@@ -8,6 +8,7 @@ import { changeCommentAC } from '../../redux/dialogsReduser';
 import { addCommentAC } from '../../redux/dialogsReduser';
 // import StoreContext from '../../StoreContext';
 import { connect } from 'react-redux';
+import withAuthRedirect from '../HOCs/AuthHOC';
 
 
 // const DialogsContainer = () => {
@@ -45,7 +46,6 @@ import { connect } from 'react-redux';
 const mapStateToProps = (state) => {
   return {
     state : state.messagesPage,
-    isAuthorised : state.auth.isAuth
   }
 }
 
@@ -56,6 +56,9 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+const DialogsContainerWrapper = withAuthRedirect(Dialogs);
+
+const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(DialogsContainerWrapper);
+
 
 export default DialogsContainer;
