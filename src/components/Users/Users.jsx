@@ -10,7 +10,6 @@ class Users extends React.Component {
   }
 
   componentDidMount() {
-
     this.props.getUsersThunkCreator();
     this.setCurrentPage({target: {textContent : null}}, 1);
   }

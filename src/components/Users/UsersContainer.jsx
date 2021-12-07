@@ -42,7 +42,6 @@ let mapStateToProps = (state) => {
 
 export let UsersContainer = connect(mapStateToProps, 
 {
-
     setUsers,
     setUsersAmount,
     setPagesAmount,

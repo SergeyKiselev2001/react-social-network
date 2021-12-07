@@ -2,18 +2,13 @@ import './App.css';
 
 import { Route, BrowserRouter } from 'react-router-dom';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import StoreContext from './StoreContext';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-
 import { UsersContainer } from './components/Users/UsersContainer';
-
-
-import User from './components/Users/Users';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from './components/Login/Login';
 
 // import classes from './style/Application.css';
-
 
 
 const App = (props) => {
@@ -22,6 +17,8 @@ const App = (props) => {
   return (
     <BrowserRouter>
       <div className="App">
+
+          
         <div className="wrapper">
           <HeaderContainer />
 
@@ -29,6 +26,12 @@ const App = (props) => {
 
          
           <div className="content">
+
+              <Route
+                  path="/login"
+                  render={ ()=> <Login/> }
+              />
+
               <Route 
                   path="/dialogs" 
                   render={ () => <DialogsContainer />  } 

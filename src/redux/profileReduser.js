@@ -74,11 +74,9 @@ export const profileDidMountThunkCreator = (currentUserId) => (dispatch) => {
           });
       }
 
-      debugger;
 
       await profileAPI.getProfileInfo(userID)
         .then((res) => {
-        debugger;
         dispatch(setProfileInfo(res.data));
       });
     }

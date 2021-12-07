@@ -3,8 +3,8 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import React from "react";
 import { connect } from "react-redux";
-import { setProfileInfo, setCurrentUserID, profileDidMountThunkCreator } from "../../redux/profileReduser";
-import { withRouter } from "react-router";
+import { profileDidMountThunkCreator } from "../../redux/profileReduser";
+import { Redirect, withRouter } from "react-router";
 
 class ProfileContainer extends React.Component {
 
@@ -13,29 +13,13 @@ class ProfileContainer extends React.Component {
     let currentUserId = this.props.match.params.USER_ID;
 
     this.props.profileDidMountThunkCreator(currentUserId);
-
-    // if (!currentUserId) {
-    //   await axios
-    //     .get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-    //       withCredentials: true,
-    //     })
-    //     .then((res) => {
-    //       if (res.data.resultCode == 0) {
-    //         currentUserId = res.data.data.id;
-    //       }
-    //     });
-    // }
-
-    // axios
-    //   .get(
-    //     `https://social-network.samuraijs.com/api/1.0/profile/` + currentUserId
-    //   )
-    //   .then((res) => {
-    //     this.props.setProfileInfo(res.data);
-    //   });
   }
 
   render() {
+
+    if (this.props.isAuthorised === false){
+      return <Redirect to="/login"/>
+    } 
     return (
       <div>
         <ProfileInfo {...this.props} />
@@ -47,18 +31,18 @@ class ProfileContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    a: 13,
+    isAuthorised : state.auth.isAuth,
     ProfileInfo: state.profilePage.profileInfo,
+
   };
 };
 
 
 
-let ProfileContainerCONNECTED = connect(mapStateToProps, {
-  setProfileInfo,
-  setCurrentUserID,
-  profileDidMountThunkCreator
 
+
+let ProfileContainerCONNECTED = connect(mapStateToProps, {
+  profileDidMountThunkCreator
 })(ProfileContainer);
 
 export default withRouter(ProfileContainerCONNECTED);
