@@ -1,6 +1,7 @@
 import React from "react";
 
 import classes from "./ProfileInfo.module.css";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
 
@@ -43,7 +44,8 @@ const ProfileInfo = (props) => {
         </div>
       <h3>{props.ProfileInfo.aboutMe}</h3>
       <h3>VK - {props.ProfileInfo.contacts?.vk}</h3>
-      
+
+        <ProfileStatus status="TEST" />
       </div>
     );
   
