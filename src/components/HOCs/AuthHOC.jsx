@@ -1,6 +1,5 @@
 
 import { Redirect } from "react-router";
-
 import React from 'react';
 import { connect } from "react-redux";
 
@@ -21,6 +20,5 @@ let withAuthRedirect = (Component) => {
     let withAuthRedirectConnected = connect(mapStateToPropsAuth)(WrapperContainer);
     return withAuthRedirectConnected;
 }
-
 
 export default withAuthRedirect;

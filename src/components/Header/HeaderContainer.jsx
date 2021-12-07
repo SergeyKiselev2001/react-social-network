@@ -8,10 +8,6 @@ import { setAuthUserData, authMeThunkCreator } from "../../redux/authReduser";
 
 class HeaderContainer extends React.Component {
     
-    constructor(props){
-        super(props);
-    }
-
     componentDidMount(){
         this.props.authMeThunkCreator();
     }

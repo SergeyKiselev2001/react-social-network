@@ -2,12 +2,15 @@
 
 
 import { connect } from "react-redux";
+import { compose } from "redux";
 import 
     {   getUsersThunkCreator,
         setUsers, setCurrentPage, setCurrentPageUsers, 
         setPagesAmount, setUsersAmount, shouldShowLoader,
         setCurrentPageThunkCreator, followThunkCreator,
         unfollowThunkCreator } from "../../redux/usersReduser";
+        
+import withAuthRedirect from "../HOCs/AuthHOC";
 
 
 import Users from './Users';
@@ -40,7 +43,7 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export let UsersContainer = connect(mapStateToProps, 
+export let UsersContainer = compose(connect(mapStateToProps, 
 {
     setUsers,
     setUsersAmount,
@@ -53,4 +56,6 @@ export let UsersContainer = connect(mapStateToProps,
     setCurrentPageThunkCreator,
     followThunkCreator,
     unfollowThunkCreator
-})(Users);
+}),
+withAuthRedirect
+)(Users);
