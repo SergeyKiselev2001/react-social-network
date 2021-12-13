@@ -3,7 +3,7 @@ import { authAPI, profileAPI } from '../API/API';
 
 let initialState = {
   profileInfo: {},
-
+  status: "",
   currentUserId: null,
 
   currentInputData: "",
@@ -42,6 +42,14 @@ const profileReduser = (state = initialState, action) => {
         ...state,
         currentUserId: action.currentUserId,
       };
+
+    case "SET_STATUS":
+  
+      return {
+        ...state,
+        status: action.status
+      }
+    
     default:
       return state;
   }
@@ -62,10 +70,37 @@ export let setCurrentUserID = (number) => ({
   currentUserId: number,
 });
 
+
+export let setStatus = (status) => {
+  return {
+    
+  type: "SET_STATUS",
+  status : status ? status : 'Статус отсутствует'
+}}
+
+
+export const getStatusTK = (userID) => (dispatch)=> {
+  profileAPI.getStatus(userID)
+  .then(
+    (response)=>{
+      dispatch(setStatus(response.data))
+    }
+  )
+}
+
+export const updateStatusTK = (status) => (dispatch) => {
+  profileAPI.updateStatus(status).then(
+    (response)=>{
+      if (response.data.resultCode === 0){
+        dispatch(setStatus(status));
+      }
+    }
+  )
+}
+
+
 export const profileDidMountThunkCreator = (currentUserId) => (dispatch) => {
-
     let userID =  currentUserId;
-
     async function first(){
       if (!userID) {
         await authAPI.authMe()
@@ -73,17 +108,13 @@ export const profileDidMountThunkCreator = (currentUserId) => (dispatch) => {
             userID = res.data.id;
           });
       }
-
-
       await profileAPI.getProfileInfo(userID)
         .then((res) => {
         dispatch(setProfileInfo(res.data));
+        dispatch(setStatus(res.data.aboutMe));
       });
     }
-
-    
     first();
-    
 };
 
 export default profileReduser;

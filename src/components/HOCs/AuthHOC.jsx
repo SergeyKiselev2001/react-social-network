@@ -13,7 +13,6 @@ let withAuthRedirect = (Component) => {
 
     class WrapperContainer extends React.Component {
         render() {
-            debugger;
             return this.props.isAuthorised ? <Component {...this.props} /> : <Redirect to="/login" /> 
         }
     }

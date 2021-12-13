@@ -45,7 +45,7 @@ const ProfileInfo = (props) => {
       <h3>{props.ProfileInfo.aboutMe}</h3>
       <h3>VK - {props.ProfileInfo.contacts?.vk}</h3>
 
-        <ProfileStatus status="TEST" />
+        <ProfileStatus status={props.status} updateStatus={props.updateStatusTK} getStatus={props.getStatusTK} />
       </div>
     );
   
