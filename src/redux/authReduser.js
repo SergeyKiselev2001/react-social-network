@@ -11,6 +11,7 @@ let initialState = {
     login: null
   },
   isAuth: false,
+  authStatus: "You are not authorised"
 };
 
 const authReduser = (state = initialState, action) => {
@@ -23,16 +24,34 @@ const authReduser = (state = initialState, action) => {
 
     case "SET_AUTH_USER_DATA":
 
-  
       return {
         ...state,
         authData : {...action.authData},
         isAuth : true
       };
+
+    case "SET_AUTH_STATUS":
+      debugger;
+
+      if (action.authStatus === "You are succsesfully authorised!"){
+        return {
+          ...state,
+          authStatus : action.authStatus,
+          isAuth : true
+        }
+      }
+
+      return {
+        ...state,
+        authStatus : action.authStatus
+      }
+    
     default:
       return state;
   }
 };
+
+export const setAuthStatus = (status) => ({type: "SET_AUTH_STATUS", authStatus: status});
 
 export let setUserData = (userId, email, login) => ({
   type: "SET_USER_DATA",
@@ -55,11 +74,21 @@ export const authMeThunkCreator = () => (dispatch) => {
 }
 
 export const tryToLoginTC = (login, password, rememberMe) => (dispatch) => {
-  debugger;
-  authAPI.tryToLogin(login, password, rememberMe).then((res)=>{
+  dispatch(setAuthStatus("Wait a second..."));
 
-    debugger;
-  });
+  setTimeout(()=>{
+    authAPI.tryToLogin(login, password, rememberMe).then((res)=>{
+      if (res.resultCode === 0){
+        dispatch(setAuthStatus("You are succsesfully authorised! Redirecting..."))
+        setTimeout(()=>{
+          dispatch(setAuthStatus("You are succsesfully authorised!"))
+        }, 1500)
+      } else {
+        dispatch(setAuthStatus("Something went wrong, try again!"))
+      }
+      debugger;
+    })
+  },1000);
 }
 
 

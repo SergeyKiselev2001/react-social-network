@@ -1,5 +1,6 @@
 
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
@@ -8,8 +9,12 @@ import {tryToLoginTC} from './../../redux/authReduser'
 let Login = (props) => {
 
     const allFormData = (obj) => {
-        debugger;
+     
         props.tryToLoginTC(obj.login, obj.password, obj.rememberMe);
+    }
+
+    if (props.authStatus === 'You are succsesfully authorised!'){
+        return <Redirect to="/profile" />;
     }
 
     return (
@@ -18,6 +23,7 @@ let Login = (props) => {
                 Login
             </h1>
             <ReduxLoginForm onSubmit={allFormData} />
+            <h2>{props.authStatus}</h2>
         </div>
     )
 }
@@ -45,7 +51,7 @@ let ReduxLoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
 
 const mapStateToProps = (state) => {
     return {
-        
+        authStatus : state.auth.authStatus
     }
 }
 
