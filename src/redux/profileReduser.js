@@ -80,9 +80,11 @@ export let setStatus = (status) => {
 
 
 export const getStatusTK = (userID) => (dispatch)=> {
+
   profileAPI.getStatus(userID)
   .then(
     (response)=>{
+    
       dispatch(setStatus(response.data))
     }
   )
@@ -91,6 +93,7 @@ export const getStatusTK = (userID) => (dispatch)=> {
 export const updateStatusTK = (status) => (dispatch) => {
   profileAPI.updateStatus(status).then(
     (response)=>{
+    
       if (response.data.resultCode === 0){
         dispatch(setStatus(status));
       }
@@ -101,17 +104,24 @@ export const updateStatusTK = (status) => (dispatch) => {
 
 export const profileDidMountThunkCreator = (currentUserId) => (dispatch) => {
     let userID =  currentUserId;
+
+  
+
     async function first(){
       if (!userID) {
+        console.log("DAAAAAAAAAA");
         await authAPI.authMe()
           .then((res) => {
             userID = res.data.id;
           });
       }
+   
       await profileAPI.getProfileInfo(userID)
         .then((res) => {
+       
+          console.log("NEEEEEEEEEEEEEt");
         dispatch(setProfileInfo(res.data));
-        dispatch(setStatus(res.data.aboutMe));
+        getStatusTK(userID);
       });
     }
     first();

@@ -27,7 +27,7 @@ export const profileAPI = {
         return axiosInstance.get('profile/status/' + id);
     },
     updateStatus(status){
-    
+        debugger;
         return axiosInstance.put('profile/status', {status: status});
     }
 }

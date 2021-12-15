@@ -13,9 +13,11 @@ class ProfileContainer extends React.Component {
 
   componentDidMount() {
     
-    let currentUserId = this.props.match.params.USER_ID;
+    let currentUserId = this.props.match.params.USER_ID || 21178;
 
+    console.log('PC')
     this.props.profileDidMountThunkCreator(currentUserId);
+    this.props.getStatusTK(currentUserId);
   }
 
   render() {
@@ -24,7 +26,7 @@ class ProfileContainer extends React.Component {
     } 
     return (
       <div>
-        <ProfileInfo {...this.props} />
+        <ProfileInfo {...this.props}/>
         <MyPostsContainer />
       </div>
     );
@@ -34,7 +36,7 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     ProfileInfo: state.profilePage.profileInfo,
-    status : state.profilePage.status
+    status : state.profilePage.status,
   };
 };
 

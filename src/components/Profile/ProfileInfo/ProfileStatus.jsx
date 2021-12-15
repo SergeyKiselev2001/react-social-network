@@ -3,21 +3,36 @@
 import React from "react";
 
 class ProfileStatus extends React.Component {
-  
-    
+
+
 
     state = {
         editMode: false,
-        status : ''
+        status : this.props.status
     }
 
     async componentDidMount(){
-        this.state.status = this.props.status;
-
-        await this.props.getStatus(2);
+        //this.state.status = 'XXX';
     
+        //await this.props.getStatus(this.state.currentUserId);
     }
 
+    componentDidUpdate(previousProps, previousState){
+
+        // без условия будет рекурсия
+        if (this.props.status != previousState.status){
+            debugger;
+            this.setState({
+                status: this.props.status
+            })
+        }
+
+        let a = this.state;
+        let b = this.props;
+
+
+        debugger;
+    }
     
     changeInput(event){
         this.setState({
@@ -26,6 +41,7 @@ class ProfileStatus extends React.Component {
     }
 
     toggleFocus = () => {
+        
         this.setState({
             editMode: true
         })
@@ -50,7 +66,7 @@ class ProfileStatus extends React.Component {
                         </div>
                   :      
                         <div>
-                            <span onDoubleClick={()=>this.toggleFocus()}>{this.props.status}</span>
+                            <span onDoubleClick={()=>this.toggleFocus()}>{this.state.status}</span>
                         </div>
                 }
               
