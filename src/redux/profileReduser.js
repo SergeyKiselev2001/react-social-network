@@ -101,7 +101,6 @@ export const updateStatusTK = (status) => (dispatch) => {
   )
 }
 
-
 export const profileDidMountThunkCreator = (currentUserId) => (dispatch) => {
     let userID =  currentUserId;
 
