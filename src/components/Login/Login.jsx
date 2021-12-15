@@ -1,12 +1,15 @@
 
+import { connect } from "react-redux";
+
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
-
+import {tryToLoginTC} from './../../redux/authReduser'
 
 let Login = (props) => {
 
     const allFormData = (obj) => {
-        console.log(obj);
+        debugger;
+        props.tryToLoginTC(obj.login, obj.password, obj.rememberMe);
     }
 
     return (
@@ -40,4 +43,18 @@ let ReduxLoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
   })(LoginForm);
 
 
-export default Login;
+const mapStateToProps = (state) => {
+    return {
+        
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        tryToLoginTC : (login, password, rememberMe) => dispatch(tryToLoginTC(login, password, rememberMe))
+    }
+}
+
+const LoginContainer =  connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default LoginContainer;

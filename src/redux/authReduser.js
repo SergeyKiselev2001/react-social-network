@@ -10,7 +10,7 @@ let initialState = {
     id: null,
     login: null
   },
-  isAuth: false
+  isAuth: false,
 };
 
 const authReduser = (state = initialState, action) => {
@@ -52,6 +52,14 @@ export const authMeThunkCreator = () => (dispatch) => {
   authAPI.authMe().then((res)=>{
     if (res.resultCode == 0){dispatch(setAuthUserData(res.data))}
   })
+}
+
+export const tryToLoginTC = (login, password, rememberMe) => (dispatch) => {
+  debugger;
+  authAPI.tryToLogin(login, password, rememberMe).then((res)=>{
+
+    debugger;
+  });
 }
 
 

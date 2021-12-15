@@ -45,7 +45,8 @@ export default compose(
   connect(mapStateToProps, {
     profileDidMountThunkCreator,
     getStatusTK,
-    updateStatusTK
+    updateStatusTK,
+
   }),
   withAuthRedirect
 )(ProfileContainer);
