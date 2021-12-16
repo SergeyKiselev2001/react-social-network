@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
+import { loginValidator, required } from "../../utils/validators/VALIDATORS";
+import { Input } from "../common/FormControls/FormControls";
 import {tryToLoginTC} from './../../redux/authReduser'
 
 let Login = (props) => {
@@ -32,9 +34,9 @@ let Login = (props) => {
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-                <Field type="text" name="login" placeholder="login" component={"input"}/>
+                <Field type="text" validate={[required]} name="login" placeholder="login" component={Input}/>
                 <br />
-                <Field type="password" name="password" placeholder="password" component={"input"}/>
+                <Field type="password" validate={[required]} name="password" placeholder="password" component={Input}/>
                 <br />
                 <Field type="checkbox" name="rememberMe" component={"input"}/> remember me
                 <br />
