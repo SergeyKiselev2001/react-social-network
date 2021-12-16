@@ -3,7 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import React from "react";
 import { connect } from "react-redux";
-import { profileDidMountThunkCreator, getStatusTK, updateStatusTK } from "../../redux/profileReduser";
+import { profileDidMountThunkCreator,  getStatusTK, updateStatusTK } from "../../redux/profileReduser";
 import { Redirect, withRouter } from "react-router";
 import withAuthRedirect from "../HOCs/AuthHOC";
 import { compose } from "redux";

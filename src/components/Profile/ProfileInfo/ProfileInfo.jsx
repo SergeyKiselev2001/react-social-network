@@ -5,6 +5,7 @@ import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
 
+
   //let currentUserId = props.location.pathname.replace('/profile/','');
   //setCurrentUserID
 
@@ -45,7 +46,7 @@ const ProfileInfo = (props) => {
       <h3>{props.ProfileInfo.aboutMe}</h3>
       <h3>VK - {props.ProfileInfo.contacts?.vk}</h3>
 
-        <ProfileStatus status={props.status} updateStatus={props.updateStatusTK} getStatus={props.getStatusTK} />
+        <ProfileStatus status={props.status}  updateStatus={props.updateStatusTK} getStatus={props.getStatusTK} />
       </div>
     );
   

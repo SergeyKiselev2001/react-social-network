@@ -1,5 +1,5 @@
 
-import { authAPI, profileAPI } from '../API/API';
+import { authAPI, profileAPI, usersAPI } from '../API/API';
 
 let initialState = {
   profileInfo: {},
@@ -42,6 +42,11 @@ const profileReduser = (state = initialState, action) => {
         ...state,
         status: action.status
       }
+
+    case "SET_USER_PHOTO":
+
+      profileAPI.setImage(action.file);
+      return state;
     
     default:
       return state;
@@ -49,6 +54,8 @@ const profileReduser = (state = initialState, action) => {
 };
 
 export let addPostAC = (currentMsg) => ({ type: "ADD-POST", currentMsg });
+
+export let setUserPhoto = (file) => ({type : "SET_USER_PHOTO", file });
 
 export let setProfileInfo = (obj) => ({
   type: "SET_PROFILE_INFO",

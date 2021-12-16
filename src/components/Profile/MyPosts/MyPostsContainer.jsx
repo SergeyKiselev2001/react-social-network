@@ -1,8 +1,9 @@
 
 import MyPosts from './MyPosts';
 
-import { addPostAC } from '../../../redux/profileReduser';
+import { addPostAC, setUserPhoto } from '../../../redux/profileReduser';
 import { connect } from 'react-redux';
+
 
 
 const mapStateToProps = (state) => {
@@ -14,6 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addPost: (currentMsg) => {return dispatch(addPostAC(currentMsg))},
+    setUserPhoto: (file) => {return dispatch(setUserPhoto(file))}
   }
 }
 

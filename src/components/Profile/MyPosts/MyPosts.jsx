@@ -4,6 +4,8 @@ import Post from './Post/Post';
 import React from 'react';
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
+import { maxLengthTC, required } from '../../../utils/validators/VALIDATORS';
+import { Textarea } from '../../common/FormControls/FormControls';
 
 
 const MyPosts = (props) => {
@@ -14,6 +16,7 @@ const MyPosts = (props) => {
 
   let storeData = (obj) => {
     props.addPost(obj.textareaData);
+    //props.setUserPhoto(obj.userPhoto);
   }
 
   return (
@@ -28,11 +31,14 @@ const MyPosts = (props) => {
   );
 };
 
+const lengthValidator = maxLengthTC(10);
+
 const MyPostsForm = (props) => {
 
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field type="text" component="textarea" name="textareaData"></Field>
+      <Field type="text" validate={[required, lengthValidator]} component={Textarea} name="textareaData" placeholder='test'></Field>
+      {/* <Field type="file" component="input" name="userPhoto"></Field> */}
       <br />
       <input type="submit" placeholder="LOGIN"/>
     </form>
@@ -41,7 +47,7 @@ const MyPostsForm = (props) => {
 
 const MyPostsFormContainer = reduxForm({
   form: "postInput",
-  fields: ['postText']
+  fields: ['textareaData', 'userPhoto']
 })(MyPostsForm);
 
 export default MyPosts;

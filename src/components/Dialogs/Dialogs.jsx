@@ -4,6 +4,7 @@ import Message from './Message/Message';
 import React from 'react';
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
+import { formValues } from 'redux-form';
 
 const Dialogs = (props) => {
   
@@ -45,6 +46,15 @@ let DialogForm = (props) => {
       <input type="submit" placeholder="LOGIN"/>
     </form>
   )
+}
+
+const validate = (formValues) => {
+  const errors = {}
+  if (!formValues.textareaData){
+    errors.textareaData = "really bruh?! enter your name first..."
+  }
+
+  return errors;
 }
 
 

@@ -41,6 +41,11 @@ export const profileAPI = {
     updateStatus(status){
         debugger;
         return axiosInstance.put('profile/status', {status: status});
+    },
+
+    setImage(file){
+        debugger;
+        return axiosInstance.put('profile/photo', {image: file});
     }
 }
 
