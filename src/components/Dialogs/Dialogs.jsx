@@ -2,35 +2,16 @@ import classes from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import React from 'react';
+import Field from "redux-form/lib/Field";
+import reduxForm from "redux-form/lib/reduxForm";
 
 const Dialogs = (props) => {
-  // let dialogsData = [
-  //   { id: 1, name: 'dimich1' },
-  //   { id: 2, name: 'dimich2' },
-  //   { id: 3, name: 'dimich3' },
-  //   { id: 4, name: 'hi hitler' },
-  // ];
   
-  // let messagesData = [
-  //   { id: 1, msg: 'heheheh' },
-  //   { id: 2, msg: 'How is your it kamasutra???' },
-  //   { id: 3, msg: 'Yo' },
-  //   { id: 4, msg: 'Yo' },
-  // ];
-
   let dialogElements = props.state.dialogsData.map( el => <DialogItem preview={el.name} id={el.id}/> );
   let messageElements = props.state.messagesData.map( el => <Message message={el.msg} id={el.id}/>)
 
-
-  let addMessage = (e) => {
-    let txt = e.target.value;
-    props.addMessage(txt)
-  }
-
-  let inputChanging = (e) => {
-    
-    let txt =e.target.value;
-    props.inputChanging(txt);
+  const storeFormData = (obj) => {
+    props.addMessage(obj.textareaData);
   }
 
   return (
@@ -41,14 +22,35 @@ const Dialogs = (props) => {
 
       <div className={classes.ActiveDialog}>
         {messageElements}
-
-        <textarea value={props.state.newMessageBody}
-                onChange={inputChanging}
-                />
-        <button onClick={ addMessage }> ADD MSG!!! </button>
+        <DialogFormContainer onSubmit={storeFormData} newMessageBody={props.newMessageBody}/>
+        
       </div>
     </div>
   );
 };
+
+let DialogForm = (props) => {
+
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <Field 
+        type="text" 
+        value={props.newMessageBody} 
+        placeholder="Введите сообщение..." 
+        component="textarea" 
+        name="textareaData"
+      />
+
+      <br />
+      <input type="submit" placeholder="LOGIN"/>
+    </form>
+  )
+}
+
+
+let DialogFormContainer = reduxForm({
+  form: 'dialogForm',
+  fields: ['textareaData']
+})(DialogForm);
 
 export default Dialogs;

@@ -6,7 +6,6 @@ let initialState = {
   status: "",
   currentUserId: null,
 
-  currentInputData: "",
   postsData: [
     { id: 1, likesCount: 34, msg: "ПРИВЕТ" },
     { id: 2, likesCount: 63, msg: "тестовый пост 2" },
@@ -17,18 +16,13 @@ let initialState = {
 
 const profileReduser = (state = initialState, action) => {
   switch (action.type) {
-    case "CHANGE-INPUT":
-      return {
-        ...state,
-        currentInputData: action.inputTxt,
-      };
 
     case "ADD-POST":
-      let body = state.currentInputData;
+
       return {
         ...state,
         currentInputData: "",
-        postsData: [...state.postsData, { id: 5, msg: body, likesCount: 0 }],
+        postsData: [...state.postsData, { id: 5, msg: action.currentMsg, likesCount: 0 }],
       };
 
     case "SET_PROFILE_INFO":
@@ -44,7 +38,6 @@ const profileReduser = (state = initialState, action) => {
       };
 
     case "SET_STATUS":
-  
       return {
         ...state,
         status: action.status
@@ -55,11 +48,7 @@ const profileReduser = (state = initialState, action) => {
   }
 };
 
-export let addPostAC = () => ({ type: "ADD-POST" });
-export let changeInputAC = (msg) => ({
-  type: "CHANGE-INPUT",
-  inputTxt: msg,
-});
+export let addPostAC = (currentMsg) => ({ type: "ADD-POST", currentMsg });
 
 export let setProfileInfo = (obj) => ({
   type: "SET_PROFILE_INFO",

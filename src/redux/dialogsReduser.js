@@ -1,9 +1,5 @@
-export let addCommentAC = () => ({ type: "ADD-COMMENT" });
 
-export let changeCommentAC = (msg) => ({
-  type: "CHANGE-COMMENT-INPUT",
-  inputTxt: msg,
-});
+
 
 let initialState = {
   messagesData: [
@@ -19,27 +15,22 @@ let initialState = {
     { id: 4, name: "Светлана" },
     { id: 5, name: "Настя" },
   ],
-  newMessageBody: "",
 };
 
 const dialogsReduser = (state = initialState, action) => {
   switch (action.type) {
-    case "CHANGE-COMMENT-INPUT":
-      return {
-        ...state,
-        newMessageBody: action.inputTxt,
-      };
 
     case "ADD-COMMENT":
-      let body = state.newMessageBody;
+      debugger;
       return {
         ...state,
-        newMessageBody: "",
-        messagesData: [...state.messagesData, { id: 5, msg: body }],
+        messagesData: [...state.messagesData, { id: 5, msg: action.currentMsg }],
       };
     default:
       return state;
   }
 };
+
+export let addCommentAC = (currentMsg) => ({ type: "ADD-COMMENT", currentMsg});
 
 export default dialogsReduser;
