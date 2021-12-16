@@ -6,7 +6,7 @@ export const required = (value) => {
     if (value){
         return undefined;
     }
-    return "error msg...";
+    return "You must write smth...";
 
 }
 
@@ -14,7 +14,7 @@ export const required = (value) => {
 export const maxLengthTC = (length) => (value) => {
     
     if (value && value.length > length){
-        return "too long...";
+        return "Too long...";
     }
 
     return undefined;

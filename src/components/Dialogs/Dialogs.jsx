@@ -4,7 +4,10 @@ import Message from './Message/Message';
 import React from 'react';
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
-import { formValues } from 'redux-form';
+import { Textarea } from '../common/FormControls/FormControls';
+import { maxLengthTC, required } from '../../utils/validators/VALIDATORS';
+import { change, untouch } from 'redux-form';
+import { ReduxFormAPI } from '../../API/REDUX_FORM_API';
 
 const Dialogs = (props) => {
   
@@ -13,6 +16,7 @@ const Dialogs = (props) => {
 
   const storeFormData = (obj) => {
     props.addMessage(obj.textareaData);
+    ReduxFormAPI.resetForm(props);
   }
 
   return (
@@ -30,6 +34,8 @@ const Dialogs = (props) => {
   );
 };
 
+const maxLengthValidator = maxLengthTC(30);
+
 let DialogForm = (props) => {
 
   return (
@@ -38,7 +44,8 @@ let DialogForm = (props) => {
         type="text" 
         value={props.newMessageBody} 
         placeholder="Введите сообщение..." 
-        component="textarea" 
+        component={Textarea}
+        validate={[required, maxLengthValidator]} 
         name="textareaData"
       />
 

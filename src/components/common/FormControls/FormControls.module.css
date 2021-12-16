@@ -1,0 +1,14 @@
+
+
+
+.textarea {
+    outline: none;
+}
+
+.error_textaera {
+    outline: none;
+    border: 1px solid red;
+}
+.error_span {
+    color: red;
+}
