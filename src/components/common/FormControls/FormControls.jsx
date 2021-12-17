@@ -29,23 +29,3 @@ export const Input = (props) => {
     return <FormControl {...props}> <input {...input} {...restProps} /></FormControl>
 
 }
-
-
-// export const Textarea = ({input, meta, ...props}) => {
-
-//     return (
-//            <FormControl {...props}>
-//                <textarea />
-//            </FormControl> 
-//     )
-// }
-
-// export const Input = ({input, meta, ...props}) => {
-
-//     debugger;
-//     return (
-//            <FormControl {...props}>
-//                <input />
-//            </FormControl> 
-//     )
-// }
