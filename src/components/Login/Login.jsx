@@ -4,11 +4,14 @@ import { Redirect } from "react-router-dom";
 
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
-import { loginValidator, required } from "../../utils/validators/VALIDATORS";
+import { required } from "../../utils/validators/VALIDATORS";
 import { Input } from "../common/FormControls/FormControls";
 import {tryToLoginTC} from './../../redux/authReduser'
 
 let Login = (props) => {
+
+
+   
 
     const allFormData = (obj) => {
      

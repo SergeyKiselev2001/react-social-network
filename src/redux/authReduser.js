@@ -31,7 +31,6 @@ const authReduser = (state = initialState, action) => {
       };
 
     case "SET_AUTH_STATUS":
-      debugger;
 
       if (action.authStatus === "You are succsesfully authorised!"){
         return {
@@ -44,6 +43,22 @@ const authReduser = (state = initialState, action) => {
       return {
         ...state,
         authStatus : action.authStatus
+      }
+
+    case "LOGOUT" :
+
+      return {
+        userId: null,
+        email: "",
+        login: "",
+        isFetching: false,
+        authData: {
+          email: null,
+          id: null,
+          login: null
+        },
+        isAuth: false,
+        authStatus: "You are not authorised"
       }
     
     default:
@@ -64,8 +79,11 @@ export let setAuthUserData = (obj) => ({
   isAuth: true
 });
 
+export const logoutAC = () => ({type: "LOGOUT"});
+
 
 // SANKI
+
 
 export const authMeThunkCreator = () => (dispatch) => {
   authAPI.authMe().then((res)=>{
@@ -91,6 +109,14 @@ export const tryToLoginTC = (login, password, rememberMe) => (dispatch) => {
   },1000);
 }
 
+export const logoutMeTC = () => (dispatch) => {
 
+   authAPI.logoutMe().then((res)=>{
+    if (res.resultCode === 0){
+      dispatch(logoutAC());
+    }
+      
+   });
+}
 
 export default authReduser;

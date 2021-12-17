@@ -25,9 +25,15 @@ export const authAPI = {
             password : password,
             rememberMe : rememberMe
         }).then((res)=>{
-            debugger;
             return res.data;
         })
+    },
+
+    logoutMe(){
+        return axiosInstance.delete("auth/login")
+            .then((res)=>{
+                return res.data;
+        });
     }
 }
 
@@ -39,12 +45,11 @@ export const profileAPI = {
         return axiosInstance.get('profile/status/' + id);
     },
     updateStatus(status){
-        debugger;
         return axiosInstance.put('profile/status', {status: status});
     },
 
     setImage(file){
-        debugger;
+        // not completed
         return axiosInstance.put('profile/photo', {image: file});
     }
 }

@@ -2,7 +2,7 @@
 
 export const required = (value) => {
 
-    debugger;
+
     if (value){
         return undefined;
     }
@@ -12,7 +12,7 @@ export const required = (value) => {
 
 
 export const loginValidator = (value) => {
-    debugger;
+    
 
     console.log('DA', !isNaN(value.split()[0]))
 
