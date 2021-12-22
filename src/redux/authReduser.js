@@ -11,7 +11,7 @@ let initialState = {
     id: null,
     login: null
   },
-  isAuth: false,
+  isAuth: null,
   authStatus: "You are not authorised"
 };
 
