@@ -74,6 +74,14 @@ export let setStatus = (status) => {
   status : status ? status : 'Статус отсутствует'
 }}
 
+/// SELECTORS 
+
+export const profileInfoSL = state => state.profilePage.profileInfo;
+export const profileStatusSL = state => state.profilePage.status;
+export const profilePostsDataSL = state => state.profilePage.postsData;
+
+
+/// SANKI
 
 export const getStatusTK = (userID) => (dispatch)=> {
 

@@ -1,6 +1,3 @@
-
-
-
 import { connect } from "react-redux";
 import { compose } from "redux";
 import 
@@ -8,25 +5,30 @@ import
         setUsers, setCurrentPage, setCurrentPageUsers, 
         setPagesAmount, setUsersAmount, shouldShowLoader,
         setCurrentPageThunkCreator, followThunkCreator,
-        unfollowThunkCreator } from "../../redux/usersReduser";
-        
+        unfollowThunkCreator, 
+        usersSL,
+        totalCountSL,
+        usersPerPageSL,
+        amountOfPagesSL,
+        currentPageSL,
+        currentPageUsersSL,
+        showLoaderSL,
+        followingInProgressIDSL} from "../../redux/usersReduser";
 import withAuthRedirect from "../HOCs/AuthHOC";
-
-
 import Users from './Users';
 
 
 let mapStateToProps = (state) => {
     
     return {
-        users: state.users.users,
-        totalCount : state.users.totalCount,
-        usersPerPage : state.users.usersPerPage,
-        amountOfPages: state.users.amountOfPages,
-        currentPage : state.users.currentPage,
-        currentPageUsers : state.users.currentPageUsers,
-        showLoader : state.users.showLoader,
-        followingInProgressID : state.users.followingInProgressID
+        users: usersSL(state),
+        totalCount : totalCountSL(state),
+        usersPerPage : usersPerPageSL(state),
+        amountOfPages: amountOfPagesSL(state),
+        currentPage : currentPageSL(state),
+        currentPageUsers : currentPageUsersSL(state),
+        showLoader : showLoaderSL(state),
+        followingInProgressID : followingInProgressIDSL(state)
     }
 }
 

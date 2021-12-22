@@ -82,6 +82,12 @@ export let setAuthUserData = (obj) => ({
 
 export const logoutAC = () => ({type: "LOGOUT"});
 
+/// SELECTORS
+
+export const authStatusSL = state => state.auth.authStatus;
+export const isAuthSL = state => state.auth.isAuth;
+export const authDataSL = state => state.auth.authData;
+
 
 // SANKI
 

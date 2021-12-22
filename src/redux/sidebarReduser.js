@@ -19,4 +19,12 @@ const sidebarReduser = (state = initialState, action) => {
   return state;
 };
 
+
+
+/// SELECTORS
+
+export const sidebarFriendsSL = state => state.sidebarPage.friends;
+export const sidebarLinksSL = state => state.sidebarPage.links;
+
+
 export default sidebarReduser;

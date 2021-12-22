@@ -2,10 +2,11 @@
 import { Redirect } from "react-router";
 import React from 'react';
 import { connect } from "react-redux";
+import { isAuthSL } from "../../redux/authReduser";
 
 const mapStateToPropsAuth = (state) => {
     return {
-        isAuthorised: state.auth.isAuth,
+        isAuthorised: isAuthSL(state)
     };
 };
 

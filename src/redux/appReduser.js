@@ -68,6 +68,10 @@ export const setInitialisatingUserID = (userId) => {
     }
 }
 
+/// SELECTORS 
+
+export const userIdSL = state => state.app.userId;
+export const userStatusSL = state => state.app.userStatus;
 
 /// SANKI
 

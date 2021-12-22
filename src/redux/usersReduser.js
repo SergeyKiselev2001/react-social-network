@@ -4,7 +4,7 @@ let initialState = {
   users: [],
   currentPageUsers: [],
   totalCount: 10,
-  usersPerPage: 100,
+  usersPerPage: 200,
   amountOfPages: [1],
   currentPage: 1,
 
@@ -124,6 +124,17 @@ export const shouldShowLoader = (shouldShowLoader) => ({
   shouldShowLoader: shouldShowLoader,
 });
 
+/// SELECTORS
+
+export const usersSL = state => state.users.users;
+export const totalCountSL = state => state.users.totalCount;
+export const usersPerPageSL = state => state.users.usersPerPage;
+export const amountOfPagesSL = state => state.users.amountOfPages;
+export const currentPageSL = state => state.users.currentPage;
+export const currentPageUsersSL = state => state.users.currentPageUsers;
+export const showLoaderSL = state => state.users.showLoader;
+export const followingInProgressIDSL = state => state.users.followingInProgressID;
+
 // SANKI
 
 export const getUsersThunkCreator = () => {
@@ -134,7 +145,7 @@ export const getUsersThunkCreator = () => {
       dispatch(setUsers(data.items));
       dispatch(setUsersAmount(data.totalCount));
 
-      let usersPerPage = 100;
+      let usersPerPage = 200;
       let totalCount = data.totalCount;
       let amountOfPages = Math.ceil(totalCount / usersPerPage);
 

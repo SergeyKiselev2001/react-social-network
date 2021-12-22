@@ -4,7 +4,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
-import { setAuthUserData, authMeThunkCreator, logoutMeTC } from "../../redux/authReduser";
+import { setAuthUserData, authMeThunkCreator, logoutMeTC, isAuthSL, authDataSL } from "../../redux/authReduser";
+import { userIdSL } from "../../redux/appReduser";
 
 class HeaderContainer extends React.Component {
     
@@ -18,9 +19,9 @@ class HeaderContainer extends React.Component {
 let mapStateToProps = (state) => {
 
     return {
-        userId : state.auth.userId,
-        isAuth : state.auth.isAuth,
-        authData : state.auth.authData,
+        userId : userIdSL(state),
+        isAuth : isAuthSL(state),
+        authData : authDataSL(state)
     }
 }
 

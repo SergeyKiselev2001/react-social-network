@@ -2,7 +2,7 @@
 
 import React from "react"
 import { connect } from "react-redux";
-import {checkUserAuthorisationTC} from './../../redux/appReduser';
+import {checkUserAuthorisationTC, userIdSL, userStatusSL} from './../../redux/appReduser';
 
 class Initialisation extends React.Component {
 
@@ -22,8 +22,8 @@ class Initialisation extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        userId : state.app.userId,
-        userStatus : state.app.userStatus,
+        userId : userIdSL(state),
+        userStatus : userStatusSL(state)
     }
 }
 

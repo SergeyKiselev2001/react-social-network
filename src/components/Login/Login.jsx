@@ -6,7 +6,7 @@ import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
 import { required } from "../../utils/validators/VALIDATORS";
 import { Input } from "../common/FormControls/FormControls";
-import {tryToLoginTC} from './../../redux/authReduser'
+import {authStatusSL, isAuthSL, tryToLoginTC} from './../../redux/authReduser'
 
 import c from './Login.module.css';
 
@@ -65,8 +65,8 @@ let ReduxLoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
 
 const mapStateToProps = (state) => {
     return {
-        authStatus : state.auth.authStatus,
-        isAuth : state.auth.isAuth
+        authStatus : authStatusSL(state),
+        isAuth : isAuthSL(state)
     }
 }
 
