@@ -1,4 +1,5 @@
 import { authAPI } from "../API/API";
+import { stopSubmit } from 'redux-form';
 
 let initialState = {
   userId: null,
@@ -92,6 +93,10 @@ export const authMeThunkCreator = () => (dispatch) => {
 }
 
 export const tryToLoginTC = (login, password, rememberMe) => (dispatch) => {
+
+  
+  
+
   dispatch(setAuthStatus("Wait a second..."));
 
   setTimeout(()=>{
@@ -102,6 +107,9 @@ export const tryToLoginTC = (login, password, rememberMe) => (dispatch) => {
           dispatch(setAuthStatus("You are succsesfully authorised!"))
         }, 1500)
       } else {
+        let action = stopSubmit('login', {_error: res.messages});
+        debugger;
+        dispatch(action);
         dispatch(setAuthStatus("Something went wrong, try again!"))
       }
       debugger;

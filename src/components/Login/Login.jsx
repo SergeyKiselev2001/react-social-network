@@ -8,6 +8,8 @@ import { required } from "../../utils/validators/VALIDATORS";
 import { Input } from "../common/FormControls/FormControls";
 import {tryToLoginTC} from './../../redux/authReduser'
 
+import c from './Login.module.css';
+
 let Login = (props) => {
 
 
@@ -18,7 +20,7 @@ let Login = (props) => {
         props.tryToLoginTC(obj.login, obj.password, obj.rememberMe);
     }
 
-    if (props.authStatus === 'You are succsesfully authorised!'){
+    if (props.authStatus === 'You are succsesfully authorised!' || props.isAuth === true){
         return <Redirect to="/profile" />;
     }
 
@@ -43,6 +45,13 @@ const LoginForm = (props) => {
                 <br />
                 <Field type="checkbox" name="rememberMe" component={"input"}/> remember me
                 <br />
+
+                {
+                    props.error ? (<div className={c.formSummaryError}>
+                        {props.error}
+                    </div>) : ''
+                }
+                
                 <input type="submit" placeholder="LOGIN"/>
             </form>
     )
@@ -56,7 +65,8 @@ let ReduxLoginForm = reduxForm({ // <----- THIS IS THE IMPORTANT PART!
 
 const mapStateToProps = (state) => {
     return {
-        authStatus : state.auth.authStatus
+        authStatus : state.auth.authStatus,
+        isAuth : state.auth.isAuth
     }
 }
 

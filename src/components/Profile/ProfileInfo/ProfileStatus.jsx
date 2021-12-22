@@ -56,6 +56,7 @@ class ProfileStatus extends React.Component {
                             <span onDoubleClick={()=>this.toggleFocus()}>{this.state.status}</span>
                         </div>
                 }
+                
               
             </div>
           );
