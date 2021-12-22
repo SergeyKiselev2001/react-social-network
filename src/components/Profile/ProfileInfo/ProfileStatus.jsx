@@ -14,7 +14,7 @@ class ProfileStatus extends React.Component {
 
         // без условия будет рекурсия
         if (this.props.status != previousProps.status){
-            debugger;
+            
             this.setState({
                 status: this.props.status
             })

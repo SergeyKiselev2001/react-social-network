@@ -9,7 +9,6 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import Initialisation from './components/Initialisation/Initialisation';
 import { connect } from 'react-redux';
-import {checkUserAuthorisationTC} from './redux/appReduser';
 
 // import classes from './style/Application.css';
 
@@ -56,7 +55,7 @@ const App = (props) => {
     }
   }
 
-  props.checkUserAuthorisationTC();
+  
   return (
     <BrowserRouter>
       <div className="App">
@@ -75,7 +74,7 @@ const mapStateToProps = state => {
 }
 
 const AppContainer = connect(mapStateToProps,{
-  checkUserAuthorisationTC
+  
 })(App);
 
 export default AppContainer;
