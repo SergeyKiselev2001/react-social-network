@@ -1,3 +1,4 @@
+
 import { usersAPI } from "../API/API";
 
 let initialState = {
@@ -126,14 +127,6 @@ export const shouldShowLoader = (shouldShowLoader) => ({
 
 /// SELECTORS
 
-export const usersSL = state => state.users.users;
-export const totalCountSL = state => state.users.totalCount;
-export const usersPerPageSL = state => state.users.usersPerPage;
-export const amountOfPagesSL = state => state.users.amountOfPages;
-export const currentPageSL = state => state.users.currentPage;
-export const currentPageUsersSL = state => state.users.currentPageUsers;
-export const showLoaderSL = state => state.users.showLoader;
-export const followingInProgressIDSL = state => state.users.followingInProgressID;
 
 // SANKI
 

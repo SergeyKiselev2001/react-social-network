@@ -67,6 +67,8 @@ const authReduser = (state = initialState, action) => {
   }
 };
 
+/// ACTION CREATORS
+
 export const setAuthStatus = (status) => ({type: "SET_AUTH_STATUS", authStatus: status});
 
 export let setUserData = (userId, email, login) => ({
@@ -82,14 +84,7 @@ export let setAuthUserData = (obj) => ({
 
 export const logoutAC = () => ({type: "LOGOUT"});
 
-/// SELECTORS
-
-export const authStatusSL = state => state.auth.authStatus;
-export const isAuthSL = state => state.auth.isAuth;
-export const authDataSL = state => state.auth.authData;
-
-
-// SANKI
+/// SANKI
 
 
 export const authMeThunkCreator = () => (dispatch) => {

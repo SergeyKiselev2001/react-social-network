@@ -1,27 +1,28 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
-import 
-    {   getUsersThunkCreator,
+import { totalCountSL,usersPerPageSL,
+    amountOfPagesSL,
+    currentPageSL,
+    currentPageUsersSL,
+    showLoaderSL,
+    followingInProgressIDSL, 
+    usersGetSuperSL } from "../../redux/SELECRORS";
+
+import {  getUsersThunkCreator,
         setUsers, setCurrentPage, setCurrentPageUsers, 
         setPagesAmount, setUsersAmount, shouldShowLoader,
         setCurrentPageThunkCreator, followThunkCreator,
-        unfollowThunkCreator, 
-        usersSL,
-        totalCountSL,
-        usersPerPageSL,
-        amountOfPagesSL,
-        currentPageSL,
-        currentPageUsersSL,
-        showLoaderSL,
-        followingInProgressIDSL} from "../../redux/usersReduser";
+        unfollowThunkCreator, } from "../../redux/usersReduser";
 import withAuthRedirect from "../HOCs/AuthHOC";
 import Users from './Users';
 
 
 let mapStateToProps = (state) => {
     
+   console.log('mstp users');
+
     return {
-        users: usersSL(state),
+        users: usersGetSuperSL(state),
         totalCount : totalCountSL(state),
         usersPerPage : usersPerPageSL(state),
         amountOfPages: amountOfPagesSL(state),

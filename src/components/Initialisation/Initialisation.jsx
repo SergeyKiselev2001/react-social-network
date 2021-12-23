@@ -2,7 +2,8 @@
 
 import React from "react"
 import { connect } from "react-redux";
-import {checkUserAuthorisationTC, userIdSL, userStatusSL} from './../../redux/appReduser';
+import { userIdSL, userStatusSL } from "../../redux/SELECRORS";
+import {checkUserAuthorisationTC} from './../../redux/appReduser';
 
 class Initialisation extends React.Component {
 

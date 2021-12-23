@@ -2,7 +2,7 @@
 import { Redirect } from "react-router";
 import React from 'react';
 import { connect } from "react-redux";
-import { isAuthSL } from "../../redux/authReduser";
+import { isAuthSL } from "../../redux/SELECRORS";
 
 const mapStateToPropsAuth = (state) => {
     return {

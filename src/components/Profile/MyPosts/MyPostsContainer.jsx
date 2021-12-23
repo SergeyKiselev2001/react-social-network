@@ -1,14 +1,14 @@
 
 import MyPosts from './MyPosts';
 
-import { addPostAC, profilePostsDataSL, setUserPhoto } from '../../../redux/profileReduser';
+import { addPostAC, setUserPhoto } from '../../../redux/profileReduser';
 import { connect } from 'react-redux';
-
+import {profilePostsDataSL} from './../../../redux/SELECRORS';
 
 
 const mapStateToProps = (state) => {
   return {
-    state: profilePostsDataSL(state)
+    state:  profilePostsDataSL(state)
   }
 }
 

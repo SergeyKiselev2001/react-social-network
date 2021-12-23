@@ -3,10 +3,11 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import React from "react";
 import { connect } from "react-redux";
-import { profileDidMountThunkCreator,  getStatusTK, updateStatusTK, profileInfoSL, profileStatusSL } from "../../redux/profileReduser";
+import { profileDidMountThunkCreator,  getStatusTK, updateStatusTK } from "../../redux/profileReduser";
 import { Redirect, withRouter } from "react-router";
 import withAuthRedirect from "../HOCs/AuthHOC";
 import { compose } from "redux";
+import { profileInfoSL, profileStatusSL } from "../../redux/SELECRORS";
 
 
 class ProfileContainer extends React.Component {
@@ -22,6 +23,9 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+
+    console.log('RENDER')
+
     if (this.props.isAuthorised === false){
       return <Redirect to="/login"/>
     } 
@@ -35,6 +39,7 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('mapStateToProps');
   return {
     ProfileInfo: profileInfoSL(state),
     status : profileStatusSL(state)

@@ -9,14 +9,23 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import Initialisation from './components/Initialisation/Initialisation';
 import { connect } from 'react-redux';
+import React from 'react';
+import store from './redux/REDUX_STORE';
+import { fakeAC } from './redux/dialogsReduser';
 
 // import classes from './style/Application.css';
 
 
-const App = (props) => {
+class App extends React.Component {
 
-  let render = () => {
-    if (props.isUserAuthorised === false || props.isUserAuthorised === true){
+  componentDidMount(){
+    setInterval(()=>{
+      store.dispatch(fakeAC());
+    }, 2000);
+  }
+
+  renderContent(){
+    if (this.props.isUserAuthorised === false || this.props.isUserAuthorised === true){
         return (
           <div className="wrapper">
               <HeaderContainer />
@@ -55,16 +64,18 @@ const App = (props) => {
     }
   }
 
+  render(){
+    return (
+      <BrowserRouter>
+        <div className="App">
+            {
+              this.renderContent()
+            }
+        </div>
+      </BrowserRouter>
+    );
+  }
   
-  return (
-    <BrowserRouter>
-      <div className="App">
-          {
-            render()
-          }
-      </div>
-    </BrowserRouter>
-  );
 };
 
 const mapStateToProps = state => {

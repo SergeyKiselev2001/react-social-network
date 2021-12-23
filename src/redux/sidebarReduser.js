@@ -1,4 +1,7 @@
 let initialState = {
+
+  
+
   friends: [
     { id: 1, fio: 'hh' },
     { id: 2, fio: 'gg' },
@@ -21,10 +24,7 @@ const sidebarReduser = (state = initialState, action) => {
 
 
 
-/// SELECTORS
 
-export const sidebarFriendsSL = state => state.sidebarPage.friends;
-export const sidebarLinksSL = state => state.sidebarPage.links;
 
 
 export default sidebarReduser;

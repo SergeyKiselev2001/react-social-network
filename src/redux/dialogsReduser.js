@@ -15,6 +15,8 @@ let initialState = {
     { id: 4, name: "Светлана" },
     { id: 5, name: "Настя" },
   ],
+
+  fake: 0,
 };
 
 const dialogsReduser = (state = initialState, action) => {
@@ -26,11 +28,16 @@ const dialogsReduser = (state = initialState, action) => {
         ...state,
         messagesData: [...state.messagesData, { id: 5, msg: action.currentMsg }],
       };
+    case "FAKE":
+      return {
+        ...state,
+        fake: action.fake
+      }
     default:
       return state;
   }
 };
 
-export let addCommentAC = (currentMsg) => ({ type: "ADD-COMMENT", currentMsg});
-
+export const addCommentAC = (currentMsg) => ({ type: "ADD-COMMENT", currentMsg});
+export const fakeAC = (fake) => ({ type: "FAKE", fake});
 export default dialogsReduser;

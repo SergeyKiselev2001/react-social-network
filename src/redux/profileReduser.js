@@ -1,5 +1,5 @@
 
-import { authAPI, profileAPI, usersAPI } from '../API/API';
+import { authAPI, profileAPI } from '../API/API';
 
 let initialState = {
   profileInfo: {},
@@ -53,10 +53,11 @@ const profileReduser = (state = initialState, action) => {
   }
 };
 
+
+/// ACTION CREATORS
+
 export let addPostAC = (currentMsg) => ({ type: "ADD-POST", currentMsg });
-
 export let setUserPhoto = (file) => ({type : "SET_USER_PHOTO", file });
-
 export let setProfileInfo = (obj) => ({
   type: "SET_PROFILE_INFO",
   profileInfo: obj,
@@ -65,8 +66,6 @@ export let setCurrentUserID = (number) => ({
   type: "SET_CURRENT_USER_ID",
   currentUserId: number,
 });
-
-
 export let setStatus = (status) => {
   return {
     
@@ -74,11 +73,6 @@ export let setStatus = (status) => {
   status : status ? status : 'Статус отсутствует'
 }}
 
-/// SELECTORS 
-
-export const profileInfoSL = state => state.profilePage.profileInfo;
-export const profileStatusSL = state => state.profilePage.status;
-export const profilePostsDataSL = state => state.profilePage.postsData;
 
 
 /// SANKI

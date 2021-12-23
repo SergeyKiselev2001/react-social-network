@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { sidebarFriendsSL, sidebarLinksSL } from '../../redux/sidebarReduser';
+import { sidebarFriendsSL, sidebarLinksSL } from '../../redux/SELECRORS';
 import Navbar from './Navbar';
 
 

@@ -4,9 +4,10 @@ import { Redirect } from "react-router-dom";
 
 import Field from "redux-form/lib/Field";
 import reduxForm from "redux-form/lib/reduxForm";
+import { authStatusSL, isAuthSL } from "../../redux/SELECRORS";
 import { required } from "../../utils/validators/VALIDATORS";
 import { Input } from "../common/FormControls/FormControls";
-import {authStatusSL, isAuthSL, tryToLoginTC} from './../../redux/authReduser'
+import { tryToLoginTC } from './../../redux/authReduser'
 
 import c from './Login.module.css';
 
