@@ -24,11 +24,13 @@ class ProfileContainer extends React.Component {
 
   render() {
 
-    console.log('RENDER')
+    
 
     if (this.props.isAuthorised === false){
       return <Redirect to="/login"/>
     } 
+
+    console.log('RENDER PROFILE')
     return (
       <div>
         <ProfileInfo {...this.props}/>

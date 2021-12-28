@@ -9,7 +9,7 @@ const Navbar = (props) => {
   let navList = props.links.map((el) => {
     return (
       <div className={classes.nav__link}>
-        <NavLink key={el.id} to={el.src} activeClassName={classes.active_link}>
+        <NavLink  to={el.src} activeClassName={classes.active_link}>
           {el.name}
         </NavLink>
       </div>

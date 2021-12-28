@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import React from 'react';
 import store from './redux/REDUX_STORE';
 import { fakeAC } from './redux/dialogsReduser';
+import TestComp from './components/TestComp/TestComp';
 
 // import classes from './style/Application.css';
 
@@ -40,6 +41,11 @@ class App extends React.Component {
                   <Route 
                       path="/dialogs" 
                       render={ () => <DialogsContainer />  } 
+                  />
+
+                  <Route 
+                    path="/news"
+                    render={ () => <TestComp/> }
                   />
                   
                   <Route 

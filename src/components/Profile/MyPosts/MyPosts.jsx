@@ -8,7 +8,9 @@ import { maxLengthTC, required } from '../../../utils/validators/VALIDATORS';
 import { Textarea } from '../../common/FormControls/FormControls';
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
+
+  console.log("RENDER MY POSTS");
   
   let postsData = props.state;
   let postsElements = postsData.map( el =>  <Post msg={el.msg}/> );
@@ -16,7 +18,6 @@ const MyPosts = (props) => {
 
   let storeData = (obj) => {
     props.addPost(obj.textareaData);
-    //props.setUserPhoto(obj.userPhoto);
   }
 
   return (
@@ -29,7 +30,7 @@ const MyPosts = (props) => {
       </div>
     </div>
   );
-};
+});
 
 const lengthValidator = maxLengthTC(10);
 
