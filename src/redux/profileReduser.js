@@ -25,6 +25,17 @@ const profileReduser = (state = initialState, action) => {
         postsData: [...state.postsData, { id: 5, msg: action.currentMsg, likesCount: 0 }],
       };
 
+    case "DELETE_POST":
+
+    let buffer = state.postsData.filter((el,index)=>index!=action.postId);
+
+    console.log(buffer);
+
+      return {
+        ...state,
+        postsData: [...buffer],
+    };
+
     case "SET_PROFILE_INFO":
       return {
         ...state,
@@ -57,6 +68,7 @@ const profileReduser = (state = initialState, action) => {
 /// ACTION CREATORS
 
 export let addPostAC = (currentMsg) => ({ type: "ADD-POST", currentMsg });
+export let deletePostAC = (postId) => ({type: "DELETE_POST", postId});
 export let setUserPhoto = (file) => ({type : "SET_USER_PHOTO", file });
 export let setProfileInfo = (obj) => ({
   type: "SET_PROFILE_INFO",
