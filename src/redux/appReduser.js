@@ -74,42 +74,27 @@ export const setInitialisatingUserID = (userId) => {
 
 export const  checkUserAuthorisationTC = () => (dispatch) => {
     
-    async function checkUserAuthorisation() {
-
+    (async function checkUserAuthorisation() {
         let userID = 0;
+        const res = await authAPI.authMe();
 
-        await authAPI.authMe().then(
-            res=>{
-                if (res.resultCode === 0){
-                    userID = res.data.id;
-                    dispatch(setInitialisatingUserID(res.data.id));
-                    dispatch(setAuthUserData(res.data));
-                }
-    
-                if (res.resultCode != 0){
-                    dispatch(setAuthorisationStatusAC(false));
-                }
-            }
-        );
+        if (res.resultCode === 0){
+                userID = res.data.id;
+                dispatch(setInitialisatingUserID(res.data.id));
+                dispatch(setAuthUserData(res.data));
+        } else {
+            dispatch(setAuthorisationStatusAC(false));
+        }
+        
+        const res2 = await profileAPI.getProfileInfo(userID);
+        dispatch(setProfileInfo(res2.data));
 
-        await profileAPI.getProfileInfo(userID).then(
-            res => {
-                dispatch(setProfileInfo(res.data));
-            }
-        )
-
-        await profileAPI.getStatus(userID).then(
-            res=>{
-                let userStatus = res.data;
-                dispatch(setStatus(userStatus));
-            }
-        )
+        const res3 = await profileAPI.getStatus(userID);
+        let userStatus = res3.data;
+        dispatch(setStatus(userStatus));
 
         dispatch(setAuthorisationStatusAC(true));
-    }
-
-    checkUserAuthorisation();
-    /// authMeThunkCreator(); на будущее...
+    })();
 } 
 
 export default appReduser;

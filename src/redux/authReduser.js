@@ -86,46 +86,30 @@ export const logoutAC = () => ({type: "LOGOUT"});
 
 /// SANKI
 
-
-export const authMeThunkCreator = () => (dispatch) => {
-  authAPI.authMe().then((res)=>{
-    if (res.resultCode == 0){dispatch(setAuthUserData(res.data))}
-  })
+export const authMeThunkCreator = () => async (dispatch) => {
+  const res = await authAPI.authMe();
+  if (res.resultCode == 0){dispatch(setAuthUserData(res.data))};
 }
 
-export const tryToLoginTC = (login, password, rememberMe) => (dispatch) => {
-
-  
-  
+export const tryToLoginTC = (login, password, rememberMe) => async (dispatch) => {
 
   dispatch(setAuthStatus("Wait a second..."));
-
-  setTimeout(()=>{
-    authAPI.tryToLogin(login, password, rememberMe).then((res)=>{
-      if (res.resultCode === 0){
-        dispatch(setAuthStatus("You are succsesfully authorised! Redirecting..."))
-        setTimeout(()=>{
-          dispatch(setAuthStatus("You are succsesfully authorised!"))
-        }, 1500)
-      } else {
-        let action = stopSubmit('login', {_error: res.messages});
-        debugger;
-        dispatch(action);
-        dispatch(setAuthStatus("Something went wrong, try again!"))
-      }
-      debugger;
-    })
-  },1000);
+  
+  setTimeout(async () => {
+    const res = await authAPI.tryToLogin(login, password, rememberMe);
+    if (res.resultCode === 0){
+      dispatch(setAuthStatus("You are succsesfully authorised! Redirecting..."))
+      setTimeout(()=>{dispatch(setAuthStatus("You are succsesfully authorised!"))}, 1500)
+    } else {
+      let action = stopSubmit('login', {_error: res.messages});
+      dispatch(action);
+      dispatch(setAuthStatus("Something went wrong, try again!"))
+    }}, 1000);
 }
 
-export const logoutMeTC = () => (dispatch) => {
-
-   authAPI.logoutMe().then((res)=>{
-    if (res.resultCode === 0){
-      dispatch(logoutAC());
-    }
-      
-   });
+export const logoutMeTC = () => async (dispatch) => {
+    const res = await authAPI.logoutMe();
+    if (res.resultCode === 0) dispatch(logoutAC());
 }
 
 export default authReduser;

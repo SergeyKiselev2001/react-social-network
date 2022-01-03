@@ -39,7 +39,6 @@ export let usersReduser = (state = initialState, action) => {
       };
 
     case "FOLLOWING_IN_PROGRESS":
-      debugger;
       return {
         ...state,
         followingInProgressID: action.followingInProgressID,
@@ -131,46 +130,47 @@ export const shouldShowLoader = (shouldShowLoader) => ({
 // SANKI
 
 export const getUsersThunkCreator = () => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(shouldShowLoader(true));
 
-    usersAPI.getUsers().then((data) => {
-      dispatch(setUsers(data.items));
-      dispatch(setUsersAmount(data.totalCount));
+    const data = await usersAPI.getUsers();
 
-      let usersPerPage = 200;
-      let totalCount = data.totalCount;
-      let amountOfPages = Math.ceil(totalCount / usersPerPage);
+    dispatch(setUsers(data.items));
+    dispatch(setUsersAmount(data.totalCount));
 
-      dispatch(setPagesAmount(amountOfPages));
-      dispatch(shouldShowLoader(false));
-    });
+    let usersPerPage = 200;
+    let totalCount = data.totalCount;
+    let amountOfPages = Math.ceil(totalCount / usersPerPage);
+
+    dispatch(setPagesAmount(amountOfPages));
+    dispatch(shouldShowLoader(false));
+
   };
 };
 
-export const setCurrentPageThunkCreator =
-  (e, pageNumber = 0) =>
-  (dispatch) => {
+export const setCurrentPageThunkCreator = (e, pageNumber = 0) => async (dispatch) => {
+
     dispatch(shouldShowLoader(true));
     dispatch(setCurrentPage(e.target.textContent));
     let page = pageNumber || e.target.textContent;
-    usersAPI.getUsers(page).then((data) => {
-      dispatch(setCurrentPageUsers(data.items));
-      dispatch(shouldShowLoader(false));
-    });
+
+    const data = await usersAPI.getUsers(page);
+
+    dispatch(setCurrentPageUsers(data.items));
+    dispatch(shouldShowLoader(false));
 };
 
-export const followThunkCreator = (id) => (dispatch) => {
+export const followThunkCreator = (id) => async (dispatch) => {
+
+  // need to rework
   dispatch(followingInProgress(true));
-  usersAPI.follow(id).then((data) => {
-    if (data.resultCode === 0) dispatch(follow(id));
-    dispatch(followingInProgress(false));
-  });
+  const data = await usersAPI.follow(id);
+  if (data.resultCode === 0) dispatch(follow(id));
+  dispatch(followingInProgress(false));
 };
 
-export const unfollowThunkCreator = (id) => (dispatch) => {
-    usersAPI.unFollow(id).then((data) => {
-        if (data.resultCode === 0) dispatch(unfollow(id));
-    });
+export const unfollowThunkCreator = (id) => async (dispatch) => {
+    const data = await usersAPI.unFollow(id);
+    if (data.resultCode === 0) dispatch(unfollow(id));
 };
 

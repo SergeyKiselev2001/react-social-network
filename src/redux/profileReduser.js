@@ -86,54 +86,32 @@ export let setStatus = (status) => {
 }}
 
 
-
 /// SANKI
 
-export const getStatusTK = (userID) => (dispatch)=> {
+export const getStatusTK = (userID) => async (dispatch) => {
 
-  profileAPI.getStatus(userID)
-  .then(
-    (response)=>{
-    
-      dispatch(setStatus(response.data))
-    }
-  )
+  const response = await profileAPI.getStatus(userID);
+  dispatch(setStatus(response.data))
 }
 
-export const updateStatusTK = (status) => (dispatch) => {
-  profileAPI.updateStatus(status).then(
-    (response)=>{
-    
-      if (response.data.resultCode === 0){
-        dispatch(setStatus(status));
-      }
-    }
-  )
+export const updateStatusTK = (status) => async (dispatch) => {
+
+  const response = await profileAPI.updateStatus(status);
+  if (response.data.resultCode === 0) dispatch(setStatus(status));
 }
 
-export const profileDidMountThunkCreator = (currentUserId) => (dispatch) => {
+export const profileDidMountThunkCreator = (currentUserId) => async (dispatch) => {
+
     let userID =  currentUserId;
 
-  
-
-    async function first(){
-      if (!userID) {
-        console.log("DAAAAAAAAAA");
-        await authAPI.authMe()
-          .then((res) => {
-            userID = res.data.id;
-          });
-      }
-   
-      await profileAPI.getProfileInfo(userID)
-        .then((res) => {
-       
-          console.log("NEEEEEEEEEEEEEt");
-        dispatch(setProfileInfo(res.data));
-        getStatusTK(userID);
-      });
+    if (!userID) {
+        const res = await authAPI.authMe();
+        userID = res.data.id;
     }
-    first();
+   
+    const res2 = await profileAPI.getProfileInfo(userID);
+    dispatch(setProfileInfo(res2.data));
+    getStatusTK(userID);
 };
 
 export default profileReduser;
