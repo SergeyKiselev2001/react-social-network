@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { totalCountSL,usersPerPageSL,
+    visiblePagesSL,
     amountOfPagesSL,
     currentPageSL,
     currentPageUsersSL,
@@ -11,7 +12,7 @@ import { totalCountSL,usersPerPageSL,
 import {  getUsersThunkCreator,
         setUsers, setCurrentPage, setCurrentPageUsers, 
         setPagesAmount, setUsersAmount, shouldShowLoader,
-        setCurrentPageThunkCreator, followThunkCreator,
+        setCurrentPageThunkCreator, followThunkCreator, setVisiblePagesAC,
         unfollowThunkCreator, } from "../../redux/usersReduser";
 import withAuthRedirect from "../HOCs/AuthHOC";
 import Users from './Users';
@@ -29,7 +30,8 @@ let mapStateToProps = (state) => {
         currentPage : currentPageSL(state),
         currentPageUsers : currentPageUsersSL(state),
         showLoader : showLoaderSL(state),
-        followingInProgressID : followingInProgressIDSL(state)
+        followingInProgressID : followingInProgressIDSL(state),
+        visiblePages : visiblePagesSL(state),
     }
 }
 
@@ -54,7 +56,7 @@ export let UsersContainer = compose(connect(mapStateToProps,
     setCurrentPage,
     setCurrentPageUsers,
     shouldShowLoader,
-
+    setVisiblePagesAC,
     getUsersThunkCreator,
     setCurrentPageThunkCreator,
     followThunkCreator,

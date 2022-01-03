@@ -1,7 +1,10 @@
 import classes from "./Users.module.css";
 import userPhoto from "./../../assets/images/cheems.jpg";
+
+
 import React from "react";
 import { NavLink } from "react-router-dom";
+
 
 
 class Users extends React.Component {
@@ -11,7 +14,8 @@ class Users extends React.Component {
 
   componentDidMount() {
     this.props.getUsersThunkCreator();
-    this.setCurrentPage({target: {textContent : null}}, 1);
+    this.setCurrentPage({target: {textContent : null}}, this.props.currentPage);
+    this.setVisiblePages([1,2,3,4,5,6,7,8,9,10]);
   }
 
   getAmountOfUsers() {
@@ -26,8 +30,44 @@ class Users extends React.Component {
     this.props.setPagesAmount(amountOfPages);
   }
 
-  setCurrentPage(e, pageNumber = 0) {
-    this.props.setCurrentPageThunkCreator(e, pageNumber = 0);
+  setVisiblePages(arr) {
+    this.props.setVisiblePagesAC(arr);
+  }
+
+  plusOnePage = () => {
+    const last = this.props.amountOfPages[this.props.amountOfPages.length - 1];
+    if (this.props.visiblePages[9] + 1 < last){
+      this.setVisiblePages(this.props.visiblePages.map(el=>el+1));
+    }
+  }
+
+  minusOnePage = () => {
+    const first = this.props.amountOfPages[0];
+  
+    if (this.props.visiblePages[0] > first){
+      this.setVisiblePages(this.props.visiblePages.map(el=>el-1));
+    }
+  }
+
+  toLastPage = () => {
+    let last = this.props.amountOfPages[this.props.amountOfPages.length - 1];
+    
+    let arr = [];
+
+    for (let i = 9; i > 0; i--){
+      arr.push(last - i);
+    }
+    arr.push(last);
+    this.setVisiblePages(arr);
+  }
+
+  toFirstPage = () => {
+    this.setVisiblePages([1,2,3,4,5,6,7,8,9,10]);
+  }
+
+  setCurrentPage(el) {
+
+    this.props.setCurrentPageThunkCreator(el);
   }
 
   renderLoader() {
@@ -118,32 +158,42 @@ class Users extends React.Component {
     }
   }
 
+  renderPages(){
+
+    return this.props.visiblePages.map(el=>{
+
+       if (this.props.currentPage == el) {
+     
+         return (<div className={classes.page + ' ' + classes.active_page}>{el}</div>)
+       }
+
+       if (this.props.currentPage != el) {
+        return (<div onClick={()=> this.setCurrentPage(el)} className={classes.page}>{el}</div>)
+       }
+      
+    })
+    
+  }
+
   render() {
-    console.log('users rerender');
     return (
       <div>
-        <div>
-          {this.props.amountOfPages.map((el) => {
-            if (el == this.props.currentPage) {
-              return (
-                <span
-                  className={[classes.selectedPage, classes.page].join(" ")}
-                >
-                  {el}
-                </span>
-              );
-            } else {
-              return (
-                <span
-                  onClick={(e) => this.setCurrentPage(e)}
-                  className={classes.page}
-                >
-                  {el}
-                </span>
-              );
-            }
-          })}
+
+        <div className={classes.pagination}>
+
+          <input type="text" className={classes.search} />
+
+          <div onClick={this.toFirstPage} className={classes.page}>&lt;&lt;</div>
+          <div onClick={this.minusOnePage} className={classes.page}>&lt;</div>
+          
+          {
+            this.renderPages()
+          }
+
+          <div onClick={this.plusOnePage} className={classes.page}>&gt;</div>
+          <div onClick={this.toLastPage} className={classes.page}>&gt;&gt;</div>
         </div>
+
 
         <div>{this.renderLoader()}</div>
         <div>{this.renderPage()}</div>

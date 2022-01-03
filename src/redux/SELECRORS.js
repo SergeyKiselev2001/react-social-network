@@ -12,6 +12,8 @@ export const currentPageUsersSL = state => state.users.currentPageUsers;
 export const showLoaderSL = state => state.users.showLoader;
 export const followingInProgressIDSL = state => state.users.followingInProgressID;
 
+export const visiblePagesSL = state => state.users.visiblePages;
+
 export const usersGetSuperSL =  createSelector( usersGet, showLoaderSL , (users, showLoader) => {
   if (showLoader){ return users.filter(el=>true); }
 })

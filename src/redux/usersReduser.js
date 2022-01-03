@@ -5,12 +5,14 @@ let initialState = {
   users: [],
   currentPageUsers: [],
   totalCount: 10,
-  usersPerPage: 200,
+  usersPerPage: 100,
   amountOfPages: [1],
   currentPage: 1,
 
   showLoader: false,
   followingInProgressID: null,
+
+  visiblePages: []
 };
 
 export let usersReduser = (state = initialState, action) => {
@@ -62,10 +64,14 @@ export let usersReduser = (state = initialState, action) => {
       };
 
     case "SET_PAGES_AMOUNT":
+
+    
       let buffer = [];
       for (let i = 1; i < action.amountOfPages + 1; i++) {
         buffer.push(i);
       }
+
+      debugger;
 
       return {
         ...state,
@@ -83,6 +89,13 @@ export let usersReduser = (state = initialState, action) => {
         ...state,
         showLoader: action.shouldShowLoader,
       };
+
+    case "SET_VISIBLE_PAGES":
+
+      return {
+        ...state,
+        visiblePages: action.visiblePages,
+      }
 
     default:
       return state;
@@ -124,6 +137,8 @@ export const shouldShowLoader = (shouldShowLoader) => ({
   shouldShowLoader: shouldShowLoader,
 });
 
+export const setVisiblePagesAC = arr => ({type : "SET_VISIBLE_PAGES", visiblePages: arr});
+
 /// SELECTORS
 
 
@@ -138,7 +153,7 @@ export const getUsersThunkCreator = () => {
     dispatch(setUsers(data.items));
     dispatch(setUsersAmount(data.totalCount));
 
-    let usersPerPage = 200;
+    let usersPerPage = 100;
     let totalCount = data.totalCount;
     let amountOfPages = Math.ceil(totalCount / usersPerPage);
 
@@ -148,11 +163,16 @@ export const getUsersThunkCreator = () => {
   };
 };
 
-export const setCurrentPageThunkCreator = (e, pageNumber = 0) => async (dispatch) => {
+export const setCurrentPageThunkCreator = (pageNumber = 0) => async (dispatch) => {
+
+
 
     dispatch(shouldShowLoader(true));
-    dispatch(setCurrentPage(e.target.textContent));
-    let page = pageNumber || e.target.textContent;
+
+    const page = !isNaN(pageNumber) == true ? pageNumber : 1;
+
+
+    dispatch(setCurrentPage(page));
 
     const data = await usersAPI.getUsers(page);
 
