@@ -11,7 +11,7 @@ import Initialisation from './components/Initialisation/Initialisation';
 import { connect } from 'react-redux';
 import React from 'react';
 import store from './redux/REDUX_STORE';
-import { fakeAC } from './redux/dialogsReduser';
+// import { fakeAC } from './redux/dialogsReduser';
 import TestComp from './components/TestComp/TestComp';
 
 // import classes from './style/Application.css';
@@ -19,11 +19,6 @@ import TestComp from './components/TestComp/TestComp';
 
 class App extends React.Component {
 
-  componentDidMount(){
-    setInterval(()=>{
-      store.dispatch(fakeAC());
-    }, 2000);
-  }
 
   renderContent(){
     if (this.props.isUserAuthorised === false || this.props.isUserAuthorised === true){
