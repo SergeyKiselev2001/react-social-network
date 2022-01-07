@@ -1,20 +1,18 @@
 import './App.css';
-
 import { Route, BrowserRouter } from 'react-router-dom';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
 import NavbarContainer from './components/Navbar/NavbarContainer';
-import { UsersContainer } from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import Initialisation from './components/Initialisation/Initialisation';
 import { connect } from 'react-redux';
 import React from 'react';
-import store from './redux/REDUX_STORE';
-// import { fakeAC } from './redux/dialogsReduser';
-import TestComp from './components/TestComp/TestComp';
+import SuspenseHOC from './components/HOCs/SuspenseHOC';
 
-// import classes from './style/Application.css';
+
+const DialogsContainer = React.lazy(()=>import('./components/Dialogs/DialogsContainer'));
+const TestComp = React.lazy(()=> import('./components/TestComp/TestComp'));
+const UsersContainer = React.lazy(()=> import('./components/Users/UsersContainer'));
 
 
 class App extends React.Component {
@@ -27,7 +25,6 @@ class App extends React.Component {
               <HeaderContainer />
               <NavbarContainer />
               <div className="content">
-    
                   <Route
                       path="/login"
                       render={ ()=> <Login/> }
@@ -35,12 +32,12 @@ class App extends React.Component {
     
                   <Route 
                       path="/dialogs" 
-                      render={ () => <DialogsContainer />  } 
+                      render={SuspenseHOC(DialogsContainer)} 
                   />
 
                   <Route 
                     path="/news"
-                    render={ () => <TestComp/> }
+                    render={SuspenseHOC(TestComp)}
                   />
                   
                   <Route 
@@ -51,8 +48,7 @@ class App extends React.Component {
     
                   <Route 
                       path="/users" 
-                      render={ () => 
-                      <UsersContainer/> }
+                      render={SuspenseHOC(UsersContainer)}
     
                   />
               </div>

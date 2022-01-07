@@ -19,8 +19,7 @@ import Users from './Users';
 
 
 let mapStateToProps = (state) => {
-    
-   console.log('mstp users');
+
 
     return {
         users: usersGetSuperSL(state),
@@ -48,7 +47,7 @@ let mapStateToProps = (state) => {
 //     }
 // }
 
-export let UsersContainer = compose(connect(mapStateToProps, 
+export default compose(connect(mapStateToProps, 
 {
     setUsers,
     setUsersAmount,
