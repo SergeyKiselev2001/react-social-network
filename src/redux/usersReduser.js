@@ -161,9 +161,8 @@ export const getUsersThunkCreator = () => {
   };
 };
 
+
 export const setCurrentPageThunkCreator = (pageNumber = 0) => async (dispatch) => {
-
-
 
     dispatch(shouldShowLoader(true));
 
