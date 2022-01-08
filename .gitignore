@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 
+
+#keys 
+
+KEYS.js
+
 # testing
 /coverage
 

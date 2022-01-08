@@ -5,6 +5,8 @@
   margin-top: 25px;
   margin-left: 25px;
   border-radius: 50%;
+
+  box-shadow: 0px 10px 31px -2px rgba(0, 0, 0, 0.781);
 }
 
 .content__author {
@@ -25,6 +27,7 @@
 }
 
 .content__header {
+  position: relative;
   background: url("https://catherineasquithgallery.com/uploads/posts/2021-02/1613219614_196-p-fon-sinii-s-razvodami-232.jpg");
   background-size: cover;
   border-radius: 5px 5px 0px 0px;
@@ -33,4 +36,49 @@
           box-shadow: 0px 5px 31px -2px rgba(34, 60, 80, 0.05);
   margin-bottom: 20px;
 }
+
+
+
+.inputFileWrapper {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 80px;
+  height: 81px;
+  background-color: rgba(0, 0, 0);
+  display: block;
+  border-radius: 50%;
+  opacity: 0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inputFile {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 80px;
+  height: 81px;
+  
+  display: block;
+  border-radius: 50%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.inputFileWrapper:hover {
+  opacity: 0.8;
+  
+}
+
+
+.inputSpan {
+  color: white;
+  
+  margin-bottom: 5px;
+  
+}
+
 /*# sourceMappingURL=ProfileInfo.module.css.map */

@@ -8,6 +8,7 @@ import Initialisation from './components/Initialisation/Initialisation';
 import { connect } from 'react-redux';
 import React from 'react';
 import SuspenseHOC from './components/HOCs/SuspenseHOC';
+import { HashRouter } from 'react-router-dom';
 
 
 const DialogsContainer = React.lazy(()=>import('./components/Dialogs/DialogsContainer'));
@@ -61,15 +62,16 @@ class App extends React.Component {
     }
   }
 
+  // basename={ process.env.PUBLIC_URL}
   render(){
     return (
-      <BrowserRouter>
+      <HashRouter >
         <div className="App">
             {
               this.renderContent()
             }
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
   

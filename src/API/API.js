@@ -1,9 +1,7 @@
 import axios from "axios";
+import {API_KEY} from './KEYS';
 
-const API_KEY = "f4483cfc-efef-4572-802e-24fa17f34d79";
 const BASE_URL = "https://social-network.samuraijs.com/api/1.0/";
-// в рамках учебного проекта оставляю этот файл открытым
-
 
 const axiosInstance = axios.create({
     withCredentials: true,
@@ -48,9 +46,18 @@ export const profileAPI = {
         return axiosInstance.put('profile/status', {status: status});
     },
 
+    
+
+
     setImage(file){
-        // not completed
-        return axiosInstance.put('profile/photo', {image: file});
+        var formData = new FormData();
+        formData.append("image", file);
+
+        return axiosInstance.put('profile/photo', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 }
 

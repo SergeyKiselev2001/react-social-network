@@ -71,8 +71,6 @@ export let usersReduser = (state = initialState, action) => {
         buffer.push(i);
       }
 
-      debugger;
-
       return {
         ...state,
         amountOfPages: buffer,

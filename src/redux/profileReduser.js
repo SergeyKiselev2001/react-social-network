@@ -54,10 +54,17 @@ const profileReduser = (state = initialState, action) => {
         status: action.status
       }
 
-    case "SET_USER_PHOTO":
+    
+    case "SAVE_PHOTO_SUCCESS":
 
-      profileAPI.setImage(action.file);
-      return state;
+    debugger;
+      return {
+        ...state,
+        profileInfo: {
+          ...state.profileInfo,
+          photos: action.photos
+        },
+      };
     
     default:
       return state;
@@ -69,7 +76,6 @@ const profileReduser = (state = initialState, action) => {
 
 export let addPostAC = (currentMsg) => ({ type: "ADD-POST", currentMsg });
 export let deletePostAC = (postId) => ({type: "DELETE_POST", postId});
-export let setUserPhoto = (file) => ({type : "SET_USER_PHOTO", file });
 export let setProfileInfo = (obj) => ({
   type: "SET_PROFILE_INFO",
   profileInfo: obj,
@@ -80,13 +86,29 @@ export let setCurrentUserID = (number) => ({
 });
 export let setStatus = (status) => {
   return {
-    
-  type: "SET_STATUS",
-  status : status ? status : 'Статус отсутствует'
+    type: "SET_STATUS",
+    status : status ? status : 'Статус отсутствует'
 }}
+
+export const setPhotoSuccess = photos => ({type: "SAVE_PHOTO_SUCCESS", photos});
 
 
 /// SANKI
+
+export const setPhoto = file => async dispatch => {
+    
+  const response = await profileAPI.setImage(file);
+
+  debugger;
+
+  if (response.data.resultCode === 0){
+    dispatch(setPhotoSuccess(response.data.data.photos));
+  }
+
+  debugger;
+
+} 
+
 
 export const getStatusTK = (userID) => async (dispatch) => {
 
