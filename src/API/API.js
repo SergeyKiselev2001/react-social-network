@@ -58,6 +58,23 @@ export const profileAPI = {
               'Content-Type': 'multipart/form-data'
             }
         });
+    },
+
+    setSocials(obj, profileInfo){
+        const values = {
+            userId: profileInfo.userId || 21178,
+            lookingForAJob: profileInfo.lookingForAJob || true,
+            aboutMe: profileInfo.aboutMe || ' - ',
+            lookingForAJobDescription: profileInfo.lookingForAJobDescription || ' - ',
+            fullName: profileInfo.fullName || 'Sergey Kiselev',
+            contacts: {
+                ...obj,
+                website: null,
+                mainLink: null
+            }
+        }
+        return axiosInstance.put('profile', values);
+        
     }
 }
 

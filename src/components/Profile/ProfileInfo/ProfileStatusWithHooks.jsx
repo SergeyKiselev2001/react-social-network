@@ -10,8 +10,6 @@ const ProfileStatusWithHooks = props => {
     let [status, setStatus] = useState(props.status);
 
     useEffect(()=>{
-     
-        console.log("NOW");
         setStatus(props.status);
     }, [props.status])
 
@@ -37,12 +35,20 @@ const ProfileStatusWithHooks = props => {
             {
                 editMode ? 
                     <div>
-                        <input onChange={inputChange} onBlur={deactivateEditMode} value={status} />
+                        {
+                            props.isOwner ? 
+                                <input onChange={inputChange} onBlur={deactivateEditMode} value={status} /> :
+                                <span>{status}</span>
+                        }
                         
                     </div>
               :      
                     <div>
-                        <span onDoubleClick={activateEditMode} >{status}</span>
+                        {
+                            props.isOwner ? 
+                                <span onDoubleClick={activateEditMode} >{status}</span> :
+                                <span>{status}</span>
+                        }
                     </div>
             }
         </div>

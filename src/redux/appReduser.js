@@ -94,6 +94,7 @@ export const  checkUserAuthorisationTC = () => (dispatch) => {
         dispatch(setStatus(userStatus));
 
         dispatch(setAuthorisationStatusAC(true));
+
     })();
 } 
 

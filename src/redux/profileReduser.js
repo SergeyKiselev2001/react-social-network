@@ -2,7 +2,11 @@
 import { authAPI, profileAPI } from '../API/API';
 
 let initialState = {
-  profileInfo: {},
+  profileInfo: {
+    contacts: {
+
+    }
+  },
   status: "",
   currentUserId: null,
 
@@ -41,6 +45,20 @@ const profileReduser = (state = initialState, action) => {
         ...state,
         profileInfo: action.profileInfo,
       };
+    
+    case "SET_SOCIALS":
+
+      debugger;
+        return {
+          ...state,
+          profileInfo: {
+            ...state.profileInfo,
+            contacts: {
+              ...action.contacts
+            }
+          }
+        }
+        
 
     case "SET_CURRENT_USER_ID":
       return {
@@ -91,21 +109,30 @@ export let setStatus = (status) => {
 }}
 
 export const setPhotoSuccess = photos => ({type: "SAVE_PHOTO_SUCCESS", photos});
+export const setSocialsAC = obj => ({type:"SET_SOCIALS", contacts: obj});
 
 
 /// SANKI
+
+export const setSocialsTK = obj => async dispatch => {
+
+  const response = await profileAPI.setSocials(obj, initialState.profileInfo);
+  //const contacts = response.data.data.contacts;
+  debugger;
+  dispatch(setSocialsAC(obj));
+
+}
 
 export const setPhoto = file => async dispatch => {
     
   const response = await profileAPI.setImage(file);
 
-  debugger;
 
   if (response.data.resultCode === 0){
     dispatch(setPhotoSuccess(response.data.data.photos));
   }
 
-  debugger;
+
 
 } 
 
@@ -132,8 +159,10 @@ export const profileDidMountThunkCreator = (currentUserId) => async (dispatch) =
     }
    
     const res2 = await profileAPI.getProfileInfo(userID);
-    dispatch(setProfileInfo(res2.data));
+    dispatch(setProfileInfo({...res2.data}));
     getStatusTK(userID);
+
+
 };
 
 export default profileReduser;

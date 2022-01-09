@@ -92,7 +92,7 @@ class Users extends React.Component {
                 <div className={classes.user}>
                   <span>
                     <div>
-                      <NavLink to={"/profile/" + el.id}>
+                      <a href={"#/profile/" + el.id} target="_blank">
                         <img
                           src={
                             el.photos.small != null
@@ -102,7 +102,7 @@ class Users extends React.Component {
                           alt="ava"
                           className={classes.img}
                         />
-                      </NavLink>
+                      </a>
                     </div>
 
                     <div>

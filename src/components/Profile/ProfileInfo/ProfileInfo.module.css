@@ -39,7 +39,8 @@
   margin-bottom: 20px;
 }
 
-.socialLinksWrapper {
+.socialLinksEditor {
+
   height: 100%;
   width: 500px;
   /* background-color: rgba(163, 163, 163, 0.623); */
@@ -50,38 +51,14 @@
   background-color: rgb(0, 0, 0, 0);
   box-shadow: -70px 0px 31px -0px rgba(0, 0, 0, 0);
   cursor: pointer;
-  
 }
 
-.socialLinksWrapper:hover {
+.socialLinksEditor:hover {
   background-color: rgb(0, 0, 0, 0.2);
   box-shadow: -70px 0px 31px -0px rgba(0, 0, 0, 0.2);
 }
 
-.socialLinks {
-  height: 50px;
-  width: fit-content;
-  padding-left: 10px;
-  /* background-color: rgba(163, 163, 163, 0.623); */
-  margin-top: 80px;
-  float: right;
-  display: flex;
-  align-items: center;
-  justify-content: end;
-}
 
-.socials {
-  height: 36px;
-  width: 36px;
-  border-radius: 50%;
-  background-color: #fff;
-  margin-right: 7px;
-}
-
-.socials img {
-  height: 36px;
-  width: 36px;
-}
 
 
 .inputFileWrapper {
@@ -124,6 +101,18 @@
   
   margin-bottom: 5px;
   
+}
+
+.editingField {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 105%;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  cursor: pointer;
+
 }
 
 /*# sourceMappingURL=ProfileInfo.module.css.map */

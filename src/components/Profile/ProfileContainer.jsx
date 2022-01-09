@@ -3,7 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import React from "react";
 import { connect } from "react-redux";
-import { profileDidMountThunkCreator,  setPhoto,  getStatusTK, updateStatusTK } from "../../redux/profileReduser";
+import { profileDidMountThunkCreator,  setPhoto,  getStatusTK, updateStatusTK, setSocialsTK } from "../../redux/profileReduser";
 import { Redirect, withRouter } from "react-router";
 import withAuthRedirect from "../HOCs/AuthHOC";
 import { compose } from "redux";
@@ -26,8 +26,8 @@ class ProfileContainer extends React.Component {
   }
 
   refreshProfile(){
-       /// НЕ ДОДЕЛАНО
-    let currentUserId = this.props.match.params.USER_ID || 21178;
+    let currentUserId = this.props.match.params.USER_ID || this.props.myID;
+ 
     this.props.profileDidMountThunkCreator(currentUserId);
     this.props.getStatusTK(currentUserId);
   }
@@ -42,6 +42,7 @@ class ProfileContainer extends React.Component {
     return (
       <div>
         <ProfileInfo 
+            setSocialsTK={this.props.setSocialsTK}
             isOwner={!this.props.match.params.USER_ID}
             {...this.props}
         />
@@ -54,7 +55,8 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     ProfileInfo: profileInfoSL(state),
-    status : profileStatusSL(state)
+    status : profileStatusSL(state),
+    myID: state.app.userId
   };
 };
 
@@ -65,6 +67,7 @@ export default compose(
     getStatusTK,
     updateStatusTK,
     setPhoto,
+    setSocialsTK
 
   }),
   withAuthRedirect

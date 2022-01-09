@@ -1,0 +1,85 @@
+
+
+
+.editWrapper {
+    display: flex;
+}
+
+.names {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-right: 10px;
+    padding-top: 4px;
+}
+
+.editZone {
+    height: 350px;
+    width: 500px;
+    background-color: rgb(95, 95, 95);
+    color: white;
+    margin: 0 auto;
+    margin-top: 100px;
+    border-radius: 5px;
+    cursor: default;
+    padding-top: 40px;
+
+    box-shadow: 0px 0px 30px 10px rgba(0,0,0,0.2);
+
+    animation-name: editZone;
+    animation-duration: .8s;
+    animation-timing-function: ease;
+   
+}
+
+@keyframes editZone {
+    0%{
+        opacity: 0.7;
+        transform: translateY(-40px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+    
+}
+
+.editZone span {
+    height: 28px;
+    margin: 8px 0px;
+    
+}
+.editZone input[type="text"]{
+    margin: 5px 0px;
+    height: 30px;
+    width: 320px;
+    padding-left: 5px;
+
+    background-color: rgb(189, 189, 189);
+    outline: none;
+    border: 1px solid rgb(122, 122, 122);
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.editZone input[type="submit"]{
+    margin-left: 45px;
+    margin-top: 20px;
+    height: 36px;
+    width: 180px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.editZone input[type="submit"]:hover{
+    background-color: rgb(125, 168, 224);
+    color: rgb(255, 255, 255);
+}
+
+.editZone input[type="submit"]:active{
+    background-color: rgb(94, 140, 201);
+}
