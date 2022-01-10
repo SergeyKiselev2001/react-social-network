@@ -1,6 +1,6 @@
 
 **На текущий момент проект в стадии разработки**.
-Промежуточный результат можно посмотреть тут  -> https://sergeykiselev2001.github.io/react-social-network/.
+Промежуточный результат можно посмотреть тут  -> https://sergeykiselev2001.github.io/react-social-network/#/login .
 Доступ к тестовому аккаунту .
 Логин kissergey98@mail.ru.
 Пароль 1234qwerty.
