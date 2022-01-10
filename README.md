@@ -1,5 +1,6 @@
 
-Результат можно посмотреть тут (На текущий момент проект в стадии разработки) -> https://sergeykiselev2001.github.io/react-social-network/
+На текущий момент проект в стадии разработки
+Промежуточный результат можно посмотреть тут  -> https://sergeykiselev2001.github.io/react-social-network/
 Доступ к тестовому аккаунту 
 Логин TestUser1234
 Пароль 1234qwerty
